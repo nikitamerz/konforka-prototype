@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аренда оборудования - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .modern-card { 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            border: 1px solid #F3F4F6;
+            transition: all 0.3s ease;
+        }
+        .modern-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); 
+        }
+        .modern-button { 
+            background: #6C37AF; 
+            border-radius: 12px; 
+            transition: all 0.3s; 
+        }
+        .modern-button:hover { 
+            background: #5A2D96; 
+            transform: translateY(-2px); 
+        }
+        .modern-button-secondary { 
+            background: #0062F5; 
+            border-radius: 12px; 
+            transition: all 0.3s; 
+        }
+        .modern-button-secondary:hover { 
+            background: #0052CC; 
+            transform: translateY(-2px); 
+        }
+        .rental-mode {
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+        .rental-mode:hover {
+            border-color: #6C37AF;
+            background: #F8F5FF;
+        }
+        .rental-mode.selected {
+            border-color: #6C37AF;
+            background: #F8F5FF;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
+                                <circle cx="12" cy="12" r="2" fill="white"/>
+                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="font-display font-bold text-xl" style="color: #6C37AF;">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
+                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#0062F5] transition-colors">Войти</button>
+                    <a href="register.html" class="modern-button text-white px-6 py-2 font-semibold">
+                        Регистрация
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h1 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                Аренда научного оборудования
+            </h1>
+            <p class="text-xl opacity-90 max-w-3xl mx-auto">
+                Доступ к оборудованию ведущих вузов и предприятий. 
+                Три режима аренды: самообслуживание, под присмотром, услуга оператора.
+            </p>
+        </div>
+    </section>
+
+    <!-- Rental Modes -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl mb-4" style="color: #6C37AF;">Режимы аренды</h2>
+                <p class="text-gray-600 text-lg">Выберите подходящий режим доступа к оборудованию</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Самообслуживание -->
+                <div class="rental-mode" onclick="selectMode('self-service')">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl">Самообслуживание</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Автономная работа исследователя. Подходит для стандартного оборудования: 3D-принтеров, простых станков.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Полная автономность</li>
+                        <li>• Стандартное оборудование</li>
+                        <li>• Минимальная стоимость</li>
+                    </ul>
+                </div>
+
+                <!-- Под присмотром -->
+                <div class="rental-mode" onclick="selectMode('supervised')">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <i class="fas fa-eye text-white"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl">Под присмотром</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Самостоятельная работа при наблюдении сотрудника организации. Для оборудования средней сложности.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Наблюдение специалиста</li>
+                        <li>• Оборудование средней сложности</li>
+                        <li>• Безопасность гарантирована</li>
+                    </ul>
+                </div>
+
+                <!-- Услуга оператора -->
+                <div class="rental-mode" onclick="selectMode('operator')">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <i class="fas fa-cogs text-white"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-xl">Услуга оператора</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Оператор выполняет работу за клиента. Подходит для сверхсложного, уникального или опасного оборудования.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Работает оператор</li>
+                        <li>• Сложное оборудование</li>
+                        <li>• Требуется ТЗ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Categories -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl mb-4" style="color: #6C37AF;">Категории оборудования</h2>
+                <p class="text-gray-600 text-lg">Найдите нужное оборудование по категориям</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 3D-принтеры -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-cube text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">3D-принтеры</h3>
+                    <p class="text-gray-600 mb-4">FDM, SLA, SLS принтеры для прототипирования</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 500₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+
+                <!-- Микроскопы -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-microscope text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Микроскопы</h3>
+                    <p class="text-gray-600 mb-4">Оптические, электронные, атомно-силовые микроскопы</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 2000₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+
+                <!-- Аналитические приборы -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Аналитические приборы</h3>
+                    <p class="text-gray-600 mb-4">Хроматографы, спектрометры, анализаторы</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 1500₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+
+                <!-- Станки -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-tools text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Станки</h3>
+                    <p class="text-gray-600 mb-4">Фрезерные, токарные, лазерные станки</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 1000₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+
+                <!-- Электроника -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-microchip text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Электроника</h3>
+                    <p class="text-gray-600 mb-4">Осциллографы, генераторы, анализаторы</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 800₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+
+                <!-- Биотехнологии -->
+                <div class="modern-card p-6">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-dna text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Биотехнологии</h3>
+                    <p class="text-gray-600 mb-4">Центрифуги, термостаты, ПЦР-машины</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">от 1200₽/час</span>
+                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl mb-4" style="color: #6C37AF;">Страхование оборудования</h2>
+                <p class="text-gray-600 text-lg">Ваша безопасность — наш приоритет</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="modern-card p-8">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">Полное покрытие</h3>
+                    <p class="text-gray-600 mb-4">Все оборудование застраховано общим полисом. Сервисный сбор включает страховку.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Покрытие до 100% стоимости</li>
+                        <li>• Прогрессивная шкала тарифов</li>
+                        <li>• Быстрое урегулирование</li>
+                    </ul>
+                </div>
+
+                <div class="modern-card p-8">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-calculator text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">Тарифы страхования</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span>Оборудование до 100 тыс.₽</span>
+                            <span class="font-semibold">2%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span>Оборудование 100-500 тыс.₽</span>
+                            <span class="font-semibold">5%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span>Оборудование свыше 500 тыс.₽</span>
+                            <span class="font-semibold">8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Process -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-display font-bold text-3xl mb-4" style="color: #6C37AF;">Процесс бронирования</h2>
+                <p class="text-gray-600 text-lg">Простой и безопасный процесс аренды</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <span class="text-white font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Выбор оборудования</h3>
+                    <p class="text-gray-600 text-sm">Найдите нужное оборудование и выберите временной слот</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <span class="text-white font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Техническое задание</h3>
+                    <p class="text-gray-600 text-sm">Для режима "Услуга оператора" отправьте ТЗ на согласование</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <span class="text-white font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Оплата и бронирование</h3>
+                    <p class="text-gray-600 text-sm">Средства замораживаются на 24 часа для безопасности</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <span class="text-white font-bold text-xl">4</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Работа с оборудованием</h3>
+                    <p class="text-gray-600 text-sm">Получите QR-код для доступа и приступайте к работе</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h2 class="font-display font-bold text-3xl mb-4">Готовы начать?</h2>
+            <p class="text-xl opacity-90 mb-8">Найдите нужное оборудование и начните свой проект уже сегодня</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="modern-button text-white px-8 py-4 text-lg font-semibold bg-white/20 hover:bg-white/30">
+                    Найти оборудование
+                </button>
+                <a href="projects.html" class="modern-button-secondary text-white px-8 py-4 text-lg font-semibold bg-white/20 hover:bg-white/30">
+                    Создать проект
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectMode(mode) {
+            // Убираем выделение со всех режимов
+            document.querySelectorAll('.rental-mode').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Выделяем выбранный режим
+            event.currentTarget.classList.add('selected');
+            
+            // Здесь можно добавить логику фильтрации оборудования по режиму
+            console.log('Selected mode:', mode);
+        }
+    </script>
+</body>
+</html>

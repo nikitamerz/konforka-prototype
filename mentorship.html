@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менторство и консультации - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #2563EB, #0891B2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .mentor-card { transition: all 0.3s ease; border: 2px solid transparent; }
+        .mentor-card:hover { border-color: #2563EB; transform: translateY(-2px); }
+        .mentor-card.selected { border-color: #2563EB; background: #EFF6FF; }
+        .calendar-day { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .calendar-day:hover { background: #EFF6FF; }
+        .calendar-day.available { background: #DBEAFE; color: #2563EB; }
+        .calendar-day.selected { background: #2563EB; color: white; }
+        .time-slot { padding: 8px 16px; border: 1px solid #E5E7EB; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .time-slot:hover { border-color: #2563EB; background: #EFF6FF; }
+        .time-slot.selected { background: #2563EB; color: white; border-color: #2563EB; }
+        .consultation-card { border-left: 4px solid #2563EB; }
+        .rating-stars { color: #FCD34D; }
+        .expertise-tag { background: #F3F4F6; color: #374151; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-flask text-white text-sm"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
+                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
+                    <a href="mentorship.html" class="text-[#0062F5] font-semibold">Менторство</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">А</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-[#6C37AF] to-[#0062F5] text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Менторство и консультации</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <p class="text-xl opacity-90 max-w-2xl">
+                    Получите экспертную поддержку от успешных предпринимателей, инвесторов и ученых
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- Mentors List -->
+                <div class="lg:col-span-2">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-display font-semibold text-2xl">Доступные менторы</h2>
+                        <div class="flex space-x-2">
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
+                                <option>Все области</option>
+                                <option>Биотехнологии</option>
+                                <option>ИТ и программирование</option>
+                                <option>Материаловедение</option>
+                                <option>Финансы и инвестиции</option>
+                            </select>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
+                                <option>Любая цена</option>
+                                <option>До 5,000 ₽/час</option>
+                                <option>5,000-10,000 ₽/час</option>
+                                <option>От 10,000 ₽/час</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Mentor 1 -->
+                        <div class="mentor-card bg-white rounded-xl p-6 shadow-lg cursor-pointer" onclick="selectMentor(1)">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-2xl font-bold">АС</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div>
+                                            <h3 class="font-display font-semibold text-xl">Алексей Смирнов</h3>
+                                            <p class="text-gray-600">CEO BioTech Solutions • 15 лет опыта</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold text-blue-600">5,000 ₽</div>
+                                            <div class="text-sm text-gray-500">/час</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="flex rating-stars mr-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600">4.9 (47 отзывов)</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-4">
+                                        Основал 3 успешных стартапа в биотехнологиях. Эксперт в фандрайзинге, 
+                                        выводе продуктов на рынок и масштабировании бизнеса.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="expertise-tag">Биотехнологии</span>
+                                        <span class="expertise-tag">Фандрайзинг</span>
+                                        <span class="expertise-tag">Маркетинг</span>
+                                        <span class="expertise-tag">Масштабирование</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-sm text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>60 минут • 
+                                            <i class="fas fa-video mr-1 ml-2"></i>Онлайн/оффлайн
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                            Выбрать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mentor 2 -->
+                        <div class="mentor-card bg-white rounded-xl p-6 shadow-lg cursor-pointer" onclick="selectMentor(2)">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-2xl font-bold">МК</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div>
+                                            <h3 class="font-display font-semibold text-xl">Мария Козлова</h3>
+                                            <p class="text-gray-600">CTO DataScience Corp • 12 лет опыта</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold text-blue-600">4,000 ₽</div>
+                                            <div class="text-sm text-gray-500">/час</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="flex rating-stars mr-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600">4.7 (32 отзыва)</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-4">
+                                        PhD в области машинного обучения. Помогает стартапам с AI, 
+                                        анализом данных и построением ML-инфраструктуры.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="expertise-tag">Machine Learning</span>
+                                        <span class="expertise-tag">Data Science</span>
+                                        <span class="expertise-tag">Python</span>
+                                        <span class="expertise-tag">MLOps</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-sm text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>45 минут • 
+                                            <i class="fas fa-video mr-1 ml-2"></i>Онлайн
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                            Выбрать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mentor 3 -->
+                        <div class="mentor-card bg-white rounded-xl p-6 shadow-lg cursor-pointer" onclick="selectMentor(3)">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-2xl font-bold">ИП</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <div>
+                                            <h3 class="font-display font-semibold text-xl">Игорь Петров</h3>
+                                            <p class="text-gray-600">Инвестор, бизнес-ангел • 20 лет опыта</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold text-blue-600">8,000 ₽</div>
+                                            <div class="text-sm text-gray-500">/час</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="flex rating-stars mr-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600">4.8 (28 отзывов)</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-4">
+                                        Инвестировал в 50+ стартапов. Эксперт в привлечении инвестиций, 
+                                        стратегическом планировании и выходе на международные рынки.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="expertise-tag">Инвестиции</span>
+                                        <span class="expertise-tag">Стратегия</span>
+                                        <span class="expertise-tag">Масштабирование</span>
+                                        <span class="expertise-tag">IPO</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-sm text-gray-500">
+                                            <i class="fas fa-clock mr-1"></i>60 минут • 
+                                            <i class="fas fa-video mr-1 ml-2"></i>Онлайн/оффлайн
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                            Выбрать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Panel -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl p-6 shadow-lg sticky top-24">
+                        <h3 class="font-display font-semibold text-xl mb-6">Бронирование консультации</h3>
+                        
+                        <!-- Selected Mentor -->
+                        <div id="selected-mentor" class="mb-6 p-4 bg-gray-50 rounded-lg hidden">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div id="mentor-avatar" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">АС</span>
+                                </div>
+                                <div>
+                                    <div id="mentor-name" class="font-semibold">Алексей Смирнов</div>
+                                    <div id="mentor-price" class="text-sm text-gray-600">5,000 ₽/час</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calendar -->
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-3">Выберите дату</h4>
+                            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                                <div class="font-medium text-gray-500 py-2">Пн</div>
+                                <div class="font-medium text-gray-500 py-2">Вт</div>
+                                <div class="font-medium text-gray-500 py-2">Ср</div>
+                                <div class="font-medium text-gray-500 py-2">Чт</div>
+                                <div class="font-medium text-gray-500 py-2">Пт</div>
+                                <div class="font-medium text-gray-500 py-2">Сб</div>
+                                <div class="font-medium text-gray-500 py-2">Вс</div>
+                                
+                                <!-- Calendar days -->
+                                <div class="calendar-day text-gray-400">28</div>
+                                <div class="calendar-day text-gray-400">29</div>
+                                <div class="calendar-day text-gray-400">30</div>
+                                <div class="calendar-day text-gray-400">31</div>
+                                <div class="calendar-day available" onclick="selectDate(1)">1</div>
+                                <div class="calendar-day available" onclick="selectDate(2)">2</div>
+                                <div class="calendar-day text-gray-400">3</div>
+                                
+                                <div class="calendar-day available" onclick="selectDate(4)">4</div>
+                                <div class="calendar-day available" onclick="selectDate(5)">5</div>
+                                <div class="calendar-day available" onclick="selectDate(6)">6</div>
+                                <div class="calendar-day available" onclick="selectDate(7)">7</div>
+                                <div class="calendar-day available" onclick="selectDate(8)">8</div>
+                                <div class="calendar-day available" onclick="selectDate(9)">9</div>
+                                <div class="calendar-day text-gray-400">10</div>
+                                
+                                <div class="calendar-day available" onclick="selectDate(11)">11</div>
+                                <div class="calendar-day available" onclick="selectDate(12)">12</div>
+                                <div class="calendar-day available" onclick="selectDate(13)">13</div>
+                                <div class="calendar-day available" onclick="selectDate(14)">14</div>
+                                <div class="calendar-day available" onclick="selectDate(15)">15</div>
+                                <div class="calendar-day available" onclick="selectDate(16)">16</div>
+                                <div class="calendar-day text-gray-400">17</div>
+                            </div>
+                        </div>
+
+                        <!-- Time Slots -->
+                        <div id="time-slots" class="mb-6 hidden">
+                            <h4 class="font-semibold mb-3">Выберите время</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="time-slot" onclick="selectTime('10:00')">10:00</div>
+                                <div class="time-slot" onclick="selectTime('11:00')">11:00</div>
+                                <div class="time-slot" onclick="selectTime('14:00')">14:00</div>
+                                <div class="time-slot" onclick="selectTime('15:00')">15:00</div>
+                                <div class="time-slot" onclick="selectTime('16:00')">16:00</div>
+                                <div class="time-slot" onclick="selectTime('17:00')">17:00</div>
+                            </div>
+                        </div>
+
+                        <!-- Consultation Type -->
+                        <div id="consultation-type" class="mb-6 hidden">
+                            <h4 class="font-semibold mb-3">Формат консультации</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="format" value="online" class="text-blue-600 focus:ring-blue-500" checked>
+                                    <span class="ml-2 text-sm">Онлайн (Zoom/Teams)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="format" value="offline" class="text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-sm">Офлайн (офис ментора)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="format" value="phone" class="text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-sm">Телефонный звонок</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Topics -->
+                        <div id="consultation-topics" class="mb-6 hidden">
+                            <h4 class="font-semibold mb-3">Тематика консультации</h4>
+                            <textarea class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                      rows="3" placeholder="Опишите кратко, что хотите обсудить..."></textarea>
+                        </div>
+
+                        <!-- Booking Summary -->
+                        <div id="booking-summary" class="mb-6 hidden">
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Сумма к оплате</h4>
+                                <div class="flex justify-between items-center">
+                                    <span>Консультация (60 минут)</span>
+                                    <span class="font-semibold">5,000 ₽</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span>Комиссия платформы (10%)</span>
+                                    <span class="font-semibold">500 ₽</span>
+                                </div>
+                                <hr class="my-3">
+                                <div class="flex justify-between items-center text-lg font-bold">
+                                    <span>Итого</span>
+                                    <span>5,500 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Book Button -->
+                        <button id="book-button" class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition-colors font-semibold hidden" 
+                                onclick="bookConsultation()">
+                            Забронировать консультацию
+                        </button>
+
+                        <!-- Initial State Message -->
+                        <div id="initial-message" class="text-center text-gray-500 py-8">
+                            <i class="fas fa-user-tie text-4xl mb-4"></i>
+                            <p>Выберите ментора для бронирования консультации</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Consultations Section -->
+            <div class="mt-12">
+                <h2 class="font-display font-semibold text-2xl mb-6">Мои консультации</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Upcoming Consultation -->
+                    <div class="consultation-card bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Предстоящая</span>
+                            <span class="text-sm text-gray-500">25 октября</span>
+                        </div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">АС</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Алексей Смирнов</h3>
+                                <p class="text-sm text-gray-600">CEO BioTech Solutions</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-600 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>15:00 - 16:00 (60 минут)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-video mr-2"></i>
+                                <span>Онлайн (Zoom)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-tag mr-2"></i>
+                                <span>Фандрайзинг и стратегия</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                Перейти к звонку
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Completed Consultation -->
+                    <div class="consultation-card bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Завершена</span>
+                            <span class="text-sm text-gray-500">18 октября</span>
+                        </div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">МК</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Мария Козлова</h3>
+                                <p class="text-sm text-gray-600">CTO DataScience Corp</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-600 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>45 минут</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-video mr-2"></i>
+                                <span>Онлайн</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-star mr-2 rating-stars"></i>
+                                <span>Оценка: 5/5</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm">
+                                Просмотреть запись
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Requested Consultation -->
+                    <div class="consultation-card bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Ожидает подтверждения</span>
+                            <span class="text-sm text-gray-500">22 октября</span>
+                        </div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">ИП</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Игорь Петров</h3>
+                                <p class="text-sm text-gray-600">Инвестор, бизнес-ангел</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-600 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>60 минут</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-video mr-2"></i>
+                                <span>Онлайн</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-tag mr-2"></i>
+                                <span>Инвестиции и стратегия</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm">
+                                Ожидает подтверждения
+                            </button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMentor = null;
+        let selectedDate = null;
+        let selectedTime = null;
+
+        function selectMentor(mentorId) {
+            selectedMentor = mentorId;
+            
+            // Update UI
+            document.querySelectorAll('.mentor-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Show booking panel
+            document.getElementById('selected-mentor').classList.remove('hidden');
+            document.getElementById('initial-message').classList.add('hidden');
+            
+            // Update mentor info based on selection
+            const mentorData = {
+                1: { name: 'Алексей Смирнов', price: '5,000 ₽', avatar: 'АС' },
+                2: { name: 'Мария Козлова', price: '4,000 ₽', avatar: 'МК' },
+                3: { name: 'Игорь Петров', price: '8,000 ₽', avatar: 'ИП' }
+            };
+            
+            const mentor = mentorData[mentorId];
+            document.getElementById('mentor-name').textContent = mentor.name;
+            document.getElementById('mentor-price').textContent = mentor.price + '/час';
+            document.querySelector('#mentor-avatar span').textContent = mentor.avatar;
+        }
+
+        function selectDate(day) {
+            selectedDate = day;
+            
+            // Update UI
+            document.querySelectorAll('.calendar-day').forEach(dayEl => {
+                dayEl.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Show time slots
+            document.getElementById('time-slots').classList.remove('hidden');
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            
+            // Update UI
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Show next steps
+            document.getElementById('consultation-type').classList.remove('hidden');
+            document.getElementById('consultation-topics').classList.remove('hidden');
+            document.getElementById('booking-summary').classList.remove('hidden');
+            document.getElementById('book-button').classList.remove('hidden');
+        }
+
+        function bookConsultation() {
+            if (!selectedMentor || !selectedDate || !selectedTime) {
+                alert('Пожалуйста, выберите ментора, дату и время');
+                return;
+            }
+            
+            // Simulate booking process
+            const button = document.getElementById('book-button');
+            button.textContent = 'Бронирование...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Консультация успешно забронирована! Ожидайте подтверждения от ментора.');
+                
+                // Reset form
+                button.textContent = 'Забронировать консультацию';
+                button.disabled = false;
+                
+                // Hide booking details
+                document.getElementById('time-slots').classList.add('hidden');
+                document.getElementById('consultation-type').classList.add('hidden');
+                document.getElementById('consultation-topics').classList.add('hidden');
+                document.getElementById('booking-summary').classList.add('hidden');
+                document.getElementById('book-button').classList.add('hidden');
+                
+                // Reset selections
+                selectedDate = null;
+                selectedTime = null;
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.classList.remove('selected');
+                });
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+            }, 2000);
+        }
+
+        // Add hover effects
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 12px 24px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('selected')) {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                }
+            });
+        });
+
+        // Initialize default state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show initial message
+            document.getElementById('initial-message').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

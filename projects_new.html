@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать проект - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#6C37AF;">
+                        <i class="fas fa-flask text-white text-sm"></i>
+                    </div>
+                    <a href="index.html" class="font-display font-bold text-xl" style="color:#6C37AF;">Конфорка</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
+                    <a href="projects.html" class="text-[#0062F5] font-semibold">Проекты</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <div class="text-white py-10" style="background: linear-gradient(90deg,#6C37AF,#0062F5)">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-3xl md:text-4xl mb-2">Создание проекта</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <form id="project-form" class="space-y-8 bg-white p-6 md:p-8 rounded-xl shadow">
+                <h2 class="font-display font-semibold text-2xl mb-2" style="color:#6C37AF;">Основная информация</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Название проекта</label>
+                        <input name="title" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Краткое описание</label>
+                        <input name="short_description" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Категория</label>
+                        <select name="category" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Выберите...</option>
+                            <option>Биология</option>
+                            <option>Физика</option>
+                            <option>Химия</option>
+                            <option>IT и программирование</option>
+                            <option>Инженерия</option>
+                            <option>Медицина</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Стадия</label>
+                        <select name="stage" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="idea">Идея</option>
+                            <option value="prototype">Прототип</option>
+                            <option value="testing">Тестирование</option>
+                            <option value="commercialization">Коммерциализация</option>
+                            <option value="completed">Завершен</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Полное описание</label>
+                    <textarea name="description" required rows="4" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]"></textarea>
+                </div>
+
+                <h2 class="font-display font-semibold text-2xl mt-6" style="color:#6C37AF;">Требования и ресурсы</h2>
+                <div class="grid md:grid-cols-3 gap-6 mt-2">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Необходимые навыки (через запятую)</label>
+                        <input name="required_skills" placeholder="Python, ML, Электроника" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Макс. размер команды</label>
+                        <input type="number" min="1" name="max_team_size" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Бюджет, ₽</label>
+                        <input type="number" step="0.01" name="budget_estimate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Теги (через запятую)</label>
+                        <input name="tags" placeholder="биотех, графен" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" />
+                    </div>
+                </div>
+
+                <h2 class="font-display font-semibold text-2xl mt-6" style="color:#6C37AF;">16 полей концепции проекта</h2>
+                <div class="grid md:grid-cols-2 gap-6 mt-2">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">1. Проблема — Что нужно решить?</label>
+                        <textarea name="problem_statement" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Что идёт не так и почему? Опишите проблему, которую решает ваш проект..."></textarea>
+                        <select name="problem_type" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Тип проблемы</option>
+                            <option value="personal_pain">Личная боль</option>
+                            <option value="observation">Наблюдение за другими</option>
+                            <option value="scientific_curiosity">Научное любопытство</option>
+                            <option value="company_order">Заказ от компании</option>
+                            <option value="social_challenge">Социальный вызов</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">2. История — сбор личного опыта</label>
+                        <textarea name="history" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Опишите момент, когда вы впервые столкнулись с этой проблемой. Что вы почувствовали? Что делали?"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">3. Источник вдохновения</label>
+                        <textarea name="inspiration_source" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Какая статья, книга, разговор или событие подтолкнуло вас к поиску решения и почему?"></textarea>
+                        <select name="inspiration_type" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Тип вдохновения</option>
+                            <option value="scientific_article">Научная статья</option>
+                            <option value="book_fiction">Книга (художественная)</option>
+                            <option value="book_nonfiction">Книга (нон-фикшн)</option>
+                            <option value="conversation">Разговор с другом</option>
+                            <option value="nature_analogy">Аналогия из природы</option>
+                            <option value="industry_analogy">Аналогия из другой отрасли</option>
+                            <option value="mistake">Ошибка/Случайность</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">4. Решение — краткое описание</label>
+                        <textarea name="solution" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Что мы делаем, чтобы решить проблему? Можно прикрепить файл."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">5. Ценностное предложение</label>
+                        <textarea name="value_proposition" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Как проект будет полезен каждой целевой аудитории?"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">6. Момент Эврика! — фиксируем инсайт</label>
+                        <textarea name="eureka_moment" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Опишите момент, когда у вас 'щелкнуло' и появилась именно эта идея. Где вы были? О чем думали?"></textarea>
+                        <select name="insight_type" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Тип инсайта</option>
+                            <option value="sudden_insight">Внезапное озарение</option>
+                            <option value="long_thought">Долгое размышление</option>
+                            <option value="experiment_result">Результат эксперимента</option>
+                            <option value="brainstorming">Мозговой штурм с командой</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">7. Аналогии и метафоры</label>
+                        <textarea name="analogies" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="С чем вы можете сравнить вашу идею? С каким устройством, приложением или сервисом?"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">8. Новизна</label>
+                        <textarea name="novelty" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Чем проект отличается от аналогов, если они существуют?"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">9. Первые 5 шагов по реализации</label>
+                        <textarea name="first_steps" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Люди идут за теми, у кого есть план. Опишите первые 5 шагов реализации проекта."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">10. Зов помощи</label>
+                        <textarea name="help_call" required rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Какие профессионалы нужны и какова их задача вместе и по отдельности?"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">11. Направление проекта</label>
+                        <select name="project_direction" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Выберите тип проекта</option>
+                            <option value="tech_startup">Технологический стартап</option>
+                            <option value="scientific_research">Научное исследование (R&D)</option>
+                            <option value="social_project">Социальный (некоммерческий) проект</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">12. Технологический стек / Отрасль</label>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2">Стек:</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="it_software" class="mr-2"> IT & Software</label>
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="ai_ml" class="mr-2"> Искусственный интеллект</label>
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="robotics" class="mr-2"> Робототехника и дроны</label>
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="biotech" class="mr-2"> Биотех и медицина</label>
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="materials" class="mr-2"> Новые материалы и химия</label>
+                                    <label class="flex items-center"><input type="checkbox" name="tech_stack[]" value="energy" class="mr-2"> Энергетика</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2">Отрасль:</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="manufacturing" class="mr-2"> Промышленность</label>
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="agriculture" class="mr-2"> Сельское хозяйство</label>
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="construction" class="mr-2"> Строительство</label>
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="transport" class="mr-2"> Транспорт и логистика</label>
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="retail" class="mr-2"> Ритейл и E-commerce</label>
+                                    <label class="flex items-center"><input type="checkbox" name="industry[]" value="media" class="mr-2"> Медиа и развлечения</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">13. Название проекта</label>
+                        <input name="project_name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Под каким именем вас должны запомнить?" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">14. Текущий статус проекта</label>
+                        <select name="current_status" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Выберите статус</option>
+                            <option value="idea">Идея</option>
+                            <option value="team_formation">Формирование команды</option>
+                            <option value="research">Исследование / CustDev</option>
+                            <option value="prototyping">Прототипирование (MVP)</option>
+                            <option value="testing">Тестирование / Поиск первых клиентов</option>
+                            <option value="scaling">Масштабирование</option>
+                            <option value="frozen">Проект заморожен / закрыт</option>
+                            <option value="successful">Проект успешен</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">15. Результаты проекта</label>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2">Для успешных проектов:</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="profit" class="mr-2"> Вышел на прибыль</label>
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="grant" class="mr-2"> Получил грант</label>
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="investment" class="mr-2"> Привлек инвестиции</label>
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="acquired" class="mr-2"> Продан (Acquired)</label>
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="rd_order" class="mr-2"> Выполнил R&D-заказ</label>
+                                    <label class="flex items-center"><input type="checkbox" name="success_results[]" value="publication" class="mr-2"> Научная публикация</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 mb-2">Для нереализованных проектов:</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="team_issues" class="mr-2"> Проблема с командой</label>
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="no_market_fit" class="mr-2"> Нет Product-Market Fit</label>
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="no_money" class="mr-2"> Закончились деньги</label>
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="competition" class="mr-2"> Обогнали конкуренты</label>
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="technical" class="mr-2"> Технически нереализуемо</label>
+                                    <label class="flex items-center"><input type="checkbox" name="failure_reasons[]" value="motivation" class="mr-2"> Потеряли мотивацию</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">16. Режим приватности</label>
+                        <select name="privacy_mode" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]">
+                            <option value="">Выберите режим</option>
+                            <option value="public">Публичный — всем видно все поля</option>
+                            <option value="private">Приватный — только название и логотип</option>
+                            <option value="stealth">Стелс-режим — только для команды</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">17. Ссылки на рабочие пространства</label>
+                        <input name="workspace_links" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0062F5]" placeholder="Telegram, Discord, Slack, Notion и т.д." />
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4">
+                    <a href="projects.html" class="px-5 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50">Отмена</a>
+                    <button type="submit" class="px-6 py-2 rounded-lg text-white font-semibold" style="background:#6C37AF">Создать проект</button>
+                </div>
+            </form>
+
+            <div id="notice" class="hidden mt-4 text-sm"></div>
+        </div>
+    </div>
+
+    <script>
+    const API_BASE = 'http://localhost:8000';
+
+    function parseList(value) {
+        if (!value) return [];
+        return value.split(',').map(s => s.trim()).filter(Boolean);
+    }
+
+    function parseJSON(value) {
+        if (!value) return undefined;
+        try { return JSON.parse(value); } catch { return value; }
+    }
+
+    document.getElementById('project-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            title: form.title.value,
+            description: form.description.value,
+            short_description: form.short_description.value || null,
+            category: form.category.value,
+            tags: parseList(form.tags.value),
+            stage: form.stage.value,
+            required_skills: parseList(form.required_skills.value),
+            max_team_size: form.max_team_size.value ? Number(form.max_team_size.value) : null,
+            budget_estimate: form.budget_estimate.value ? Number(form.budget_estimate.value) : null,
+            problem_statement: form.problem_statement.value,
+            hypothesis: form.hypothesis.value,
+            novelty: form.novelty.value,
+            target_market: form.target_market.value,
+            trl_level: form.trl_level.value,
+            goals_milestones: form.goals_milestones.value,
+            success_metrics: form.success_metrics.value,
+            risks_mitigation: form.risks_mitigation.value,
+            required_equipment_details: parseJSON(form.required_equipment_details.value) || [],
+            timeline_months: Number(form.timeline_months.value),
+            team_roles_required: parseList(form.team_roles_required.value),
+            ip_status: form.ip_status.value,
+            compliance_ethics: form.compliance_ethics.value || null,
+            budget_breakdown: parseJSON(form.budget_breakdown.value) || null,
+            expected_outcomes: form.expected_outcomes.value,
+            collaboration_needs: form.collaboration_needs.value || null,
+        };
+
+        const notice = document.getElementById('notice');
+        notice.className = 'mt-4 text-sm text-gray-700';
+        notice.textContent = 'Отправка...';
+
+        try {
+            const token = localStorage.getItem('konforka_token');
+            const res = await fetch(`${API_BASE}/projects`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                },
+                body: JSON.stringify(data)
+            });
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.detail || 'Ошибка создания проекта');
+            }
+            const created = await res.json();
+            notice.className = 'mt-4 text-sm text-green-700';
+            notice.textContent = 'Проект успешно создан! Перенаправление...';
+            setTimeout(() => { window.location.href = 'projects.html'; }, 1200);
+        } catch (err) {
+            notice.className = 'mt-4 text-sm text-red-700';
+            notice.textContent = err.message;
+        }
+    });
+    </script>
+</body>
+</html>
+
+

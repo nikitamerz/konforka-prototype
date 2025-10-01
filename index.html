@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конфорка - Суперприложение для развития науки</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .vanta-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-content { position: relative; z-index: 10; }
+        .gradient-text { background: linear-gradient(135deg, #6C37AF, #0062F5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+        
+        /* Новый дизайн в стиле последнего изображения */
+        .modern-card { 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            border: 1px solid #F3F4F6;
+            transition: all 0.3s ease;
+        }
+        .modern-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); 
+        }
+        .modern-input { 
+            border: 2px solid #E5E7EB; 
+            border-radius: 12px; 
+            transition: all 0.3s; 
+        }
+        .modern-input:focus { 
+            border-color: #6C37AF; 
+            box-shadow: 0 0 0 3px rgba(108, 55, 175, 0.1); 
+        }
+        .modern-button { 
+            background: #6C37AF; 
+            border-radius: 12px; 
+            transition: all 0.3s; 
+        }
+        .modern-button:hover { 
+            background: #5A2D96; 
+            transform: translateY(-2px); 
+        }
+        .modern-button-secondary { 
+            background: #0062F5; 
+            border-radius: 12px; 
+            transition: all 0.3s; 
+        }
+        .modern-button-secondary:hover { 
+            background: #0052CC; 
+            transform: translateY(-2px); 
+        }
+        .pill-button {
+            background: #F3F4F6;
+            border-radius: 20px;
+            padding: 8px 16px;
+            transition: all 0.3s;
+        }
+        .pill-button:hover {
+            background: #6C37AF;
+            color: white;
+        }
+        .pill-button.selected {
+            background: #6C37AF;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
+                                <circle cx="12" cy="12" r="2" fill="white"/>
+                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="font-display font-bold text-xl" style="color: #6C37AF;">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Оборудование</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
+                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">R&D Заказы</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#0062F5] transition-colors">Войти</button>
+                    <a href="register.html" class="modern-button text-white px-6 py-2 font-semibold">
+                        Регистрация
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div id="vanta-bg" class="vanta-canvas"></div>
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-display font-bold text-5xl md:text-7xl mb-2 leading-tight" style="color:#6C37AF;">
+                    Конфорка
+                </h1>
+                <p class="text-sm mb-4" style="color:#0062F5;">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-6" style="color:#111827;">
+                    Суперприложение для развития науки
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+                    Мост между академической наукой и реальным сектором экономики. 
+                    Четыре маркетплейса в одном решении: Проекты, Оборудование, Менторство, R&D Заказы.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="marketplaces.html" class="modern-button text-white px-8 py-4 text-lg font-semibold">
+                        Начать исследование
+                    </a>
+                    <a href="#features" class="modern-button-secondary text-white px-8 py-4 text-lg font-semibold">
+                        Узнать больше
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 pulse-animation">
+            <i class="fas fa-chevron-down text-gray-400 text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Проблема, которую мы решаем
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Современное научное оборудование дорого стоит, и доступ к нему для студентов фактически закрыт. 
+                    Прорывные идеи умирают, так и не дойдя до стадии прототипа.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Недоступность оборудования</h3>
+                    <p class="text-gray-600">Дорогое оборудование простаивает, не принося пользы экономике</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Нехватка команды</h3>
+                    <p class="text-gray-600">Сложно найти единомышленников с нужными компетенциями</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-3">Отсутствие наставников</h3>
+                    <p class="text-gray-600">Нет опыта и экспертной поддержки для развития идей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Наше решение
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Конфорка - это онлайн-платформа, объединяющая четыре маркетплейса в одном решении
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover scroll-reveal">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-lightbulb text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">Идеи и проекты</h3>
+                    <p class="text-gray-600 mb-4">Публикуйте идеи, собирайте команды, развивайте стартапы</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Создание проектов</li>
+                        <li>• Формирование команд</li>
+                        <li>• Управление задачами</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover scroll-reveal">
+                    <div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-cogs text-teal-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">Оборудование</h3>
+                    <p class="text-gray-600 mb-4">Арендуйте научное оборудование от вузов и предприятий</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Каталог оборудования</li>
+                        <li>• Онлайн-бронирование</li>
+                        <li>• Календарь доступности</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover scroll-reveal">
+                    <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-user-tie text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">Менторство</h3>
+                    <p class="text-gray-600 mb-4">Получайте консультации от экспертов и предпринимателей</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Каталог менторов</li>
+                        <li>• Видеоконсультации</li>
+                        <li>• Рейтинги и отзывы</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover scroll-reveal">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-trophy text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-xl mb-4">R&D заказы</h3>
+                    <p class="text-gray-600 mb-4">Участвуйте в заказах от промышленных предприятий</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Доска заказов</li>
+                        <li>• Призовые фонды</li>
+                        <li>• Оценка решений</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Как это работает
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Простой путь от идеи к реализации через наши маркетплейсы
+                </p>
+            </div>
+            <div class="grid md:grid-cols-5 gap-8 items-center">
+                <div class="text-center scroll-reveal">
+                    <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">1</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Идея</h3>
+                    <p class="text-gray-600 text-sm">Опубликуйте свою идею для исследования</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-20 h-20 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">2</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Команда</h3>
+                    <p class="text-gray-600 text-sm">Соберите команду единомышленников</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">3</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Оборудование</h3>
+                    <p class="text-gray-600 text-sm">Арендуйте необходимое оборудование</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">4</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Прототип</h3>
+                    <p class="text-gray-600 text-sm">Создайте работающий прототип</p>
+                </div>
+                <div class="text-center scroll-reveal">
+                    <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">5</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Наставничество</h3>
+                    <p class="text-gray-600 text-sm">Получите поддержку экспертов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Возможности платформы
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Все инструменты для развития научных исследований и технологических стартапов
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-search-plus text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Поиск партнеров</h3>
+                    <p class="text-gray-600 text-sm">Находите единомышленников по навыкам, интересам и опыту</p>
+                </div>
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-calendar-alt text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Календарь бронирования</h3>
+                    <p class="text-gray-600 text-sm">Удобное планирование экспериментов и аренды оборудования</p>
+                </div>
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-video text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Видеоконсультации</h3>
+                    <p class="text-gray-600 text-sm">Прямое общение с менторами через встроенную видеосвязь</p>
+                </div>
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-chart-line text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Аналитика проектов</h3>
+                    <p class="text-gray-600 text-sm">Отслеживание прогресса и метрик развития проектов</p>
+                </div>
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-shield-alt text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Безопасность данных</h3>
+                    <p class="text-gray-600 text-sm">Защита интеллектуальной собственности и конфиденциальности</p>
+                </div>
+                <div class="modern-card p-6 scroll-reveal">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <i class="fas fa-mobile-alt text-white"></i>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-3">Мобильное приложение</h3>
+                    <p class="text-gray-600 text-sm">Доступ ко всем функциям платформы с любого устройства</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section id="stats" class="py-20 text-white" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="scroll-reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2">500+</div>
+                    <div class="text-lg opacity-90">Активных проектов</div>
+                </div>
+                <div class="scroll-reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2">1000+</div>
+                    <div class="text-lg opacity-90">Единиц оборудования</div>
+                </div>
+                <div class="scroll-reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2">200+</div>
+                    <div class="text-lg opacity-90">Менторов</div>
+                </div>
+                <div class="scroll-reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2">50+</div>
+                    <div class="text-lg opacity-90">R&D заказов</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="scroll-reveal">
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
+                    Готовы изменить мир науки?
+                </h2>
+                <p class="text-xl text-gray-600 mb-8">
+                    Присоединяйтесь к платформе, где идеи становятся реальностью, 
+                    а наука приносит реальную пользу экономике.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="register.html" class="modern-button text-white px-8 py-4 text-lg font-semibold">
+                        Начать прямо сейчас
+                    </a>
+                    <a href="marketplaces.html" class="modern-button-secondary text-white px-8 py-4 text-lg font-semibold">
+                        Демонстрация платформы
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
+                                <circle cx="12" cy="12" r="2" fill="white"/>
+                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="font-display font-bold text-xl">Конфорка</span>
+                        <span class="ml-3 text-sm text-gray-400">для тех, кто горит идеей</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Суперприложение для развития науки и технологического предпринимательства. 
+                        Мост между академической наукой и реальным сектором экономики.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-display font-semibold text-lg mb-4">Продукт</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Маркетплейс проектов</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Аренда оборудования</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Система менторства</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">R&D заказы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-display font-semibold text-lg mb-4">Компания</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">О нас</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Команда</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Контакты</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Поддержка</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Конфорка. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.BIRDS({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0xf8fafc,
+            color1: 0x2563eb,
+            color2: 0x0891b2,
+            colorMode: 'lerp',
+            birdSize: 1.20,
+            wingSpan: 25.00,
+            speedLimit: 3.00,
+            separation: 20.00,
+            alignment: 20.00,
+            cohesion: 20.00,
+            quantity: 3.00
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95');
+                navbar.classList.remove('bg-white/90');
+            } else {
+                navbar.classList.add('bg-white/90');
+                navbar.classList.remove('bg-white/95');
+            }
+        });
+    </script>
+</body>
+</html>

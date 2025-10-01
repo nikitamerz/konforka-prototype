@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маркетплейсы - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #2563EB, #0891B2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .tab-active { background: linear-gradient(135deg, #2563EB, #0891B2); color: white; }
+        .tab-inactive { background: white; color: #6B7280; border: 1px solid #E5E7EB; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        .equipment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .mentor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .rd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1.5rem; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-flask text-white text-sm"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
+                    <a href="marketplaces.html" class="text-[#0062F5] font-semibold">Маркетплейсы</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">А</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-[#6C37AF] to-[#0062F5] text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Маркетплейсы</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <p class="text-xl opacity-90 max-w-2xl">
+                    Четыре взаимосвязанных платформы для развития науки и технологического предпринимательства
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="bg-white border-b border-gray-200 sticky top-16 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-1 py-4">
+                    <button id="tab-projects" class="tab-button px-6 py-3 rounded-lg font-semibold transition-all tab-active" style="background:#6C37AF;color:#fff;">
+                        <i class="fas fa-lightbulb mr-2"></i>Проекты
+                    </button>
+                    <button id="tab-equipment" class="tab-button px-6 py-3 rounded-lg font-semibold transition-all tab-inactive">
+                        <i class="fas fa-cogs mr-2"></i>Оборудование
+                    </button>
+                    <button id="tab-mentors" class="tab-button px-6 py-3 rounded-lg font-semibold transition-all tab-inactive">
+                        <i class="fas fa-user-tie mr-2"></i>Менторы
+                    </button>
+                    <button id="tab-rd" class="tab-button px-6 py-3 rounded-lg font-semibold transition-all tab-inactive">
+                        <i class="fas fa-trophy mr-2"></i>R&D Заказы
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- Projects Marketplace -->
+            <div id="content-projects" class="tab-content">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                            <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Категория</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все категории</option>
+                                    <option>Биология</option>
+                                    <option>Физика</option>
+                                    <option>Химия</option>
+                                    <option>IT и программирование</option>
+                                    <option>Инженерия</option>
+                                    <option>Медицина</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Стадия проекта</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">Идея</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">Прототип</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">Тестирование</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">Коммерциализация</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Необходимые навыки</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full cursor-pointer hover:bg-blue-200">Python</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full cursor-pointer hover:bg-green-200">ML</span>
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full cursor-pointer hover:bg-purple-200">MATLAB</span>
+                                    <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs rounded-full cursor-pointer hover:bg-orange-200">LabVIEW</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Применить фильтры
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Projects Grid -->
+                    <div class="lg:w-3/4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-display font-semibold text-2xl">Активные проекты</h2>
+                            <a href="projects_new.html" class="bg-[#6C37AF] text-white px-6 py-2 rounded-lg hover:opacity-90 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Создать проект
+                            </a>
+                        </div>
+
+                        <div class="project-grid">
+                            <!-- Project Card 1 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-dna text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">Биосенсоры для диагностики</h3>
+                                            <p class="text-sm text-gray-500">Биология • Прототип</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Активен</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Разработка биосенсоров на основе графена для быстрой диагностики заболеваний. 
+                                    Требуется поддержка в разработке электроники и программного обеспечения.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">А</span>
+                                        </div>
+                                        <div class="w-8 h-8 bg-green-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">М</span>
+                                        </div>
+                                        <div class="w-8 h-8 bg-purple-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">+2</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-500">3/5 участников</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Биотехнологии</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Наноматериалы</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Электроника</span>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Присоединиться
+                                </button>
+                            </div>
+
+                            <!-- Project Card 2 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-robot text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">AI для анализа данных</h3>
+                                            <p class="text-sm text-gray-500">IT • Идея</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Набор команды</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Машинное обучение для анализа больших данных в научных исследованиях. 
+                                    Ищем data scientists и ML инженеров.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 bg-red-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">И</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-500">1/4 участников</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Python</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">TensorFlow</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Data Science</span>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Присоединиться
+                                </button>
+                            </div>
+
+                            <!-- Project Card 3 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-leaf text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">Зеленая энергетика</h3>
+                                            <p class="text-sm text-gray-500">Инженерия • Тестирование</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Тестирование</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Разработка эффективных солнечных панелей нового поколения. 
+                                    Нужны специалисты по материаловедению и электронике.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">С</span>
+                                        </div>
+                                        <div class="w-8 h-8 bg-green-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">А</span>
+                                        </div>
+                                        <div class="w-8 h-8 bg-purple-600 rounded-full border-2 border-white flex items-center justify-center">
+                                            <span class="text-white text-xs">+3</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-500">5/6 участников</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Энергетика</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Материалы</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Электроника</span>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Присоединиться
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipment Marketplace -->
+            <div id="content-equipment" class="tab-content hidden">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                            <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Категория оборудования</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все категории</option>
+                                    <option>Спектрометры</option>
+                                    <option>Микроскопы</option>
+                                    <option>Анализаторы</option>
+                                    <option>Лабораторное оборудование</option>
+                                    <option>Измерительные приборы</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Стоимость аренды</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">До 1000 ₽/час</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">1000-5000 ₽/час</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 5000 ₽/час</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Местоположение</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все города</option>
+                                    <option>Москва</option>
+                                    <option>Санкт-Петербург</option>
+                                    <option>Новосибирск</option>
+                                    <option>Екатеринбург</option>
+                                </select>
+                            </div>
+
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Применить фильтры
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Equipment Grid -->
+                    <div class="lg:w-3/4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-display font-semibold text-2xl">Доступное оборудование</h2>
+                            <button class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Добавить оборудование
+                            </button>
+                        </div>
+
+                        <div class="equipment-grid">
+                            <!-- Equipment Card 1 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-microscope text-gray-400 text-4xl"></i>
+                                </div>
+                                <div class="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 class="font-display font-semibold text-lg">Электронный микроскоп</h3>
+                                        <p class="text-sm text-gray-500">JEOL JSM-6010LA</p>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Доступен</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Аналитический сканирующий электронный микроскоп с разрешением до 3 нм.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-2xl font-bold text-blue-600">2,500 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-right text-sm text-gray-500">
+                                        <div><i class="fas fa-map-marker-alt mr-1"></i>Москва</div>
+                                        <div><i class="fas fa-university mr-1"></i>МГУ</div>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать
+                                </button>
+                            </div>
+
+                            <!-- Equipment Card 2 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-gray-400 text-4xl"></i>
+                                </div>
+                                <div class="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 class="font-display font-semibold text-lg">Спектрометр масс</h3>
+                                        <p class="text-sm text-gray-500">Thermo Scientific LTQ Orbitrap</p>
+                                    </div>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Ограничено</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Высокоточный масс-спектрометр для анализа сложных смесей.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-2xl font-bold text-blue-600">4,800 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-right text-sm text-gray-500">
+                                        <div><i class="fas fa-map-marker-alt mr-1"></i>СПб</div>
+                                        <div><i class="fas fa-industry mr-1"></i>БИОКАД</div>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать
+                                </button>
+                            </div>
+
+                            <!-- Equipment Card 3 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-atom text-gray-400 text-4xl"></i>
+                                </div>
+                                <div class="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 class="font-display font-semibold text-lg">Рентгеновский дифрактометр</h3>
+                                        <p class="text-sm text-gray-500">Rigaku MiniFlex600</p>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Доступен</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Для анализа кристаллической структуры материалов и фазового состава.
+                                </p>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-2xl font-bold text-blue-600">1,800 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-right text-sm text-gray-500">
+                                        <div><i class="fas fa-map-marker-alt mr-1"></i>Новосибирск</div>
+                                        <div><i class="fas fa-university mr-1"></i>ИТФ СО РАН</div>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mentors Marketplace -->
+            <div id="content-mentors" class="tab-content hidden">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                            <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Область экспертизы</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все области</option>
+                                    <option>Биотехнологии</option>
+                                    <option>ИТ и программирование</option>
+                                    <option>Материаловедение</option>
+                                    <option>Энергетика</option>
+                                    <option>Финансы и инвестиции</option>
+                                    <option>Маркетинг и продажи</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Опыт работы</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="experience" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 5 лет</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="experience" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 10 лет</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="experience" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 20 лет</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Стоимость консультации</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">До 3,000 ₽/час</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">3,000-10,000 ₽/час</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="price" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 10,000 ₽/час</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Применить фильтры
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mentors Grid -->
+                    <div class="lg:w-3/4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-display font-semibold text-2xl">Менторы и эксперты</h2>
+                            <button class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Стать ментором
+                            </button>
+                        </div>
+
+                        <div class="mentor-grid">
+                            <!-- Mentor Card 1 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="text-center mb-4">
+                                    <div class="w-20 h-20 bg-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">АС</span>
+                                    </div>
+                                    <h3 class="font-display font-semibold text-lg">Алексей Смирнов</h3>
+                                    <p class="text-sm text-gray-500">CEO BioTech Solutions</p>
+                                    <div class="flex items-center justify-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">4.9 (47 отзывов)</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        15 лет в биотехнологиях. Основал 3 успешных стартапа. 
+                                        Эксперт в фандрайзинге и выводе продуктов на рынок.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Биотехнологии</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Фандрайзинг</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Маркетинг</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-xl font-bold text-blue-600">5,000 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>60 минут
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать консультацию
+                                </button>
+                            </div>
+
+                            <!-- Mentor Card 2 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="text-center mb-4">
+                                    <div class="w-20 h-20 bg-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">МК</span>
+                                    </div>
+                                    <h3 class="font-display font-semibold text-lg">Мария Козлова</h3>
+                                    <p class="text-sm text-gray-500">CTO DataScience Corp</p>
+                                    <div class="flex items-center justify-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">4.7 (32 отзыва)</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        12 лет в Data Science. PhD в области машинного обучения. 
+                                        Помогает стартапам с AI и анализом данных.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Machine Learning</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Data Science</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Python</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-xl font-bold text-blue-600">4,000 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>45 минут
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать консультацию
+                                </button>
+                            </div>
+
+                            <!-- Mentor Card 3 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="text-center mb-4">
+                                    <div class="w-20 h-20 bg-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">ИП</span>
+                                    </div>
+                                    <h3 class="font-display font-semibold text-lg">Игорь Петров</h3>
+                                    <p class="text-sm text-gray-500">Инвестор, бизнес-ангел</p>
+                                    <div class="flex items-center justify-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">4.8 (28 отзывов)</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        20 лет в венчурных инвестициях. Инвестировал в 50+ стартапов. 
+                                        Помогает с привлечением инвестиций и стратегией развития.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Инвестиции</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Стратегия</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Масштабирование</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div>
+                                        <span class="text-xl font-bold text-blue-600">8,000 ₽</span>
+                                        <span class="text-gray-500 text-sm">/час</span>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>60 минут
+                                    </div>
+                                </div>
+                                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Забронировать консультацию
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R&D Orders Marketplace -->
+            <div id="content-rd" class="tab-content hidden">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Filters Sidebar -->
+                    <div class="lg:w-1/4">
+                        <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                            <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Категория заказа</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все категории</option>
+                                    <option>Биотехнологии</option>
+                                    <option>Информационные технологии</option>
+                                    <option>Материаловедение</option>
+                                    <option>Энергетика</option>
+                                    <option>Машиностроение</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Призовой фонд</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="prize" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">До 500,000 ₽</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="prize" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">500,000-2,000,000 ₽</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="prize" class="text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm">От 2,000,000 ₽</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Срок подачи</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Все сроки</option>
+                                    <option>До 1 месяца</option>
+                                    <option>1-3 месяца</option>
+                                    <option>3-6 месяцев</option>
+                                    <option>Более 6 месяцев</option>
+                                </select>
+                            </div>
+
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Применить фильтры
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- R&D Orders Grid -->
+                    <div class="lg:w-3/4">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-display font-semibold text-2xl">Активные R&D заказы</h2>
+                            <button class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Разместить заказ
+                            </button>
+                        </div>
+
+                        <div class="rd-grid">
+                            <!-- R&D Order Card 1 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-pills text-blue-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">Новые антибиотики</h3>
+                                            <p class="text-sm text-gray-500">Фармацевтика</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Активен</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Разработка нового класса антибиотиков для борьбы с устойчивыми бактериями. 
+                                    Требуется создать соединения с новым механизмом действия.
+                                </p>
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <div class="text-sm text-gray-500">Призовой фонд</div>
+                                        <div class="text-2xl font-bold text-green-600">5,000,000 ₽</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-500">Кол-во победителей</div>
+                                        <div class="text-lg font-semibold">3</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="text-sm text-gray-500 mb-1">Дедлайн: 15 декабря 2024</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">Осталось 45 дней</div>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Фармацевтика</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Биохимия</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Синтез</span>
+                                </div>
+                                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Подать заявку
+                                </button>
+                            </div>
+
+                            <!-- R&D Order Card 2 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-microchip text-purple-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">Квантовый процессор</h3>
+                                            <p class="text-sm text-gray-500">Информационные технологии</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Активен</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Создание прототипа квантового процессора с устойчивостью к ошибкам. 
+                                    Необходимо разработать архитектуру и алгоритмы квантовых вычислений.
+                                </p>
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <div class="text-sm text-gray-500">Призовой фонд</div>
+                                        <div class="text-2xl font-bold text-green-600">12,000,000 ₽</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-500">Кол-во победителей</div>
+                                        <div class="text-lg font-semibold">2</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="text-sm text-gray-500 mb-1">Дедлайн: 30 января 2025</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">Осталось 95 дней</div>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Квантовые вычисления</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Физика</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Алгоритмы</span>
+                                </div>
+                                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Подать заявку
+                                </button>
+                            </div>
+
+                            <!-- R&D Order Card 3 -->
+                            <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-solar-panel text-orange-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-display font-semibold text-lg">Перовскитные солнечные элементы</h3>
+                                            <p class="text-sm text-gray-500">Энергетика</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Ограниченное время</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    Повышение эффективности и стабильности перовскитных солнечных элементов. 
+                                    Цель - достичь КПД более 25% при длительной стабильности.
+                                </p>
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <div class="text-sm text-gray-500">Призовой фонд</div>
+                                        <div class="text-2xl font-bold text-green-600">3,500,000 ₽</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-500">Кол-во победителей</div>
+                                        <div class="text-lg font-semibold">5</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="text-sm text-gray-500 mb-1">Дедлайн: 10 ноября 2024</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-600 h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">Осталось 10 дней</div>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Материаловедение</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Энергетика</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Нанотехнологии</span>
+                                </div>
+                                <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Подать заявку
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.id.replace('tab-', '');
+                
+                // Update button states
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('tab-inactive');
+                });
+                button.classList.remove('tab-inactive');
+                button.classList.add('tab-active');
+                
+                // Update content visibility
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            });
+        });
+
+        // Sample data for demonstration
+        const sampleProjects = [
+            {
+                id: 1,
+                title: "Биосенсоры для диагностики",
+                category: "Биология",
+                stage: "Прототип",
+                description: "Разработка биосенсоров на основе графена...",
+                teamSize: "3/5",
+                skills: ["Биотехнологии", "Наноматериалы", "Электроника"]
+            }
+        ];
+
+        // Add hover effects to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 12px 24px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // Simulate loading states
+        function showLoading() {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.opacity = '0.5';
+            });
+        }
+
+        function hideLoading() {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.opacity = '1';
+            });
+        }
+
+        // Add click handlers for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (button.textContent.includes('Присоединиться') || 
+                    button.textContent.includes('Забронировать') || 
+                    button.textContent.includes('Подать заявку')) {
+                    e.preventDefault();
+                    alert('Функция будет доступна после регистрации в системе!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
