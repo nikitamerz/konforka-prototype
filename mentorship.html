@@ -35,18 +35,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-flask text-white text-sm"></i>
-                        </div>
-                        <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
-                    </div>
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="Логотип.svg" alt="Конфорка" class="h-10" />
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
-                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
-                    <a href="mentorship.html" class="text-[#0062F5] font-semibold">Менторство</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Команда</a>
+                    <a href="mentorship.html" class="text-[#6C37AF] font-semibold">Менторы</a>
+                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button class="text-gray-700 hover:text-blue-600 transition-colors">
@@ -62,7 +59,7 @@
 
     <div class="pt-16">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-[#6C37AF] to-[#0062F5] text-white py-12">
+        <div style="background: #6C37AF;" class="text-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Менторство и консультации</h1>
                 <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
@@ -80,18 +77,20 @@
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="font-display font-semibold text-2xl">Доступные менторы</h2>
                         <div class="flex space-x-2">
-                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
-                                <option>Все области</option>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#6C37AF]">
+                                <option>Технологический стек</option>
+                                <option>IT & Software</option>
+                                <option>Искусственный интеллект</option>
                                 <option>Биотехнологии</option>
-                                <option>ИТ и программирование</option>
                                 <option>Материаловедение</option>
-                                <option>Финансы и инвестиции</option>
+                                <option>Энергетика</option>
                             </select>
-                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
-                                <option>Любая цена</option>
-                                <option>До 5,000 ₽/час</option>
-                                <option>5,000-10,000 ₽/час</option>
-                                <option>От 10,000 ₽/час</option>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#6C37AF]">
+                                <option>Отрасль</option>
+                                <option>Промышленность</option>
+                                <option>Медицина</option>
+                                <option>Финансы</option>
+                                <option>Маркетинг</option>
                             </select>
                         </div>
                     </div>
@@ -139,7 +138,7 @@
                                             <i class="fas fa-clock mr-1"></i>60 минут • 
                                             <i class="fas fa-video mr-1 ml-2"></i>Онлайн/оффлайн
                                         </div>
-                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                        <button onclick="checkAuthAndSelect()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                             Выбрать
                                         </button>
                                     </div>
@@ -189,7 +188,7 @@
                                             <i class="fas fa-clock mr-1"></i>45 минут • 
                                             <i class="fas fa-video mr-1 ml-2"></i>Онлайн
                                         </div>
-                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                        <button onclick="checkAuthAndSelect()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                             Выбрать
                                         </button>
                                     </div>
@@ -239,7 +238,7 @@
                                             <i class="fas fa-clock mr-1"></i>60 минут • 
                                             <i class="fas fa-video mr-1 ml-2"></i>Онлайн/оффлайн
                                         </div>
-                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                        <button onclick="checkAuthAndSelect()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                             Выбрать
                                         </button>
                                     </div>
@@ -510,7 +509,18 @@
         let selectedDate = null;
         let selectedTime = null;
 
+        function checkAuthAndSelect() {
+            const token = localStorage.getItem('konforka_token');
+            if (!token) {
+                alert('Для бронирования консультации необходимо зарегистрироваться.');
+                window.location.href = 'register.html';
+                return false;
+            }
+            return true;
+        }
+
         function selectMentor(mentorId) {
+            if (!checkAuthAndSelect()) return;
             selectedMentor = mentorId;
             
             // Update UI
@@ -566,6 +576,13 @@
         }
 
         function bookConsultation() {
+            const token = localStorage.getItem('konforka_token');
+            if (!token) {
+                alert('Для бронирования консультации необходимо зарегистрироваться.');
+                window.location.href = 'register.html';
+                return;
+            }
+
             if (!selectedMentor || !selectedDate || !selectedTime) {
                 alert('Пожалуйста, выберите ментора, дату и время');
                 return;

@@ -10,14 +10,12 @@
     <style>
         body { font-family: 'Source Sans Pro', sans-serif; }
         .font-display { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #6C37AF, #0062F5); }
+        .gradient-bg { background: #6C37AF; }
         .form-section { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .input-field { border: 2px solid #E5E7EB; border-radius: 12px; transition: all 0.3s; }
-        .input-field:focus { border-color: #6C37AF; box-shadow: 0 0 0 3px rgba(108, 55, 175, 0.1); }
+        .input-field:focus { border-color: #6C37AF; box-shadow: 0 0 0 3px rgba(108, 55, 175, 0.1); outline: none; }
         .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
         .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
-        .btn-secondary { background: #0062F5; border-radius: 12px; transition: all 0.3s; }
-        .btn-secondary:hover { background: #0052CC; transform: translateY(-2px); }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -25,10 +23,7 @@
     <div class="gradient-bg text-white py-8">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex items-center justify-center mb-4">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-4">
-                    <i class="fas fa-flask text-white text-xl"></i>
-                </div>
-                <h1 class="font-display font-bold text-3xl">Конфорка</h1>
+                <img src="Логотип.svg" alt="Конфорка" class="h-12" style="filter: brightness(0) invert(1);" />
             </div>
             <p class="text-lg opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
         </div>
@@ -36,9 +31,12 @@
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <form id="register-form" class="form-section p-8 space-y-8">
+            <h2 class="font-display font-semibold text-2xl mb-2" style="color: #6C37AF;">Регистрация на платформе</h2>
+            <p class="text-gray-600 mb-6">Заполните основные данные для создания аккаунта. Всего 16 полей.</p>
+            
             <!-- Основная информация -->
             <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Основная информация</h2>
+                <h3 class="font-display font-semibold text-xl mb-4" style="color: #6C37AF;">1-6. Основная информация</h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Имя *</label>
@@ -53,12 +51,12 @@
                         <input name="email" type="email" required class="w-full input-field px-4 py-3" />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
-                        <input name="phone" type="tel" class="w-full input-field px-4 py-3" />
-                    </div>
-                    <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Пароль *</label>
                         <input name="password" type="password" required class="w-full input-field px-4 py-3" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+                        <input name="phone" type="tel" class="w-full input-field px-4 py-3" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Город/регион</label>
@@ -69,12 +67,12 @@
 
             <!-- Профессиональная информация -->
             <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Профессиональная информация</h2>
+                <h3 class="font-display font-semibold text-xl mb-4" style="color: #6C37AF;">7-10. Профессиональная информация</h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Тип пользователя *</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Роль на платформе *</label>
                         <select name="user_type" required class="w-full input-field px-4 py-3">
-                            <option value="">Выберите тип</option>
+                            <option value="">Выберите роль</option>
                             <option value="researcher">Исследователь</option>
                             <option value="mentor">Ментор</option>
                             <option value="equipment_provider">Поставщик оборудования</option>
@@ -88,7 +86,7 @@
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Навыки (через запятую)</label>
-                        <input name="skills" placeholder="Python, Machine Learning, Электроника" class="w-full input-field px-4 py-3" />
+                        <input name="skills" placeholder="Python, ML, Электроника" class="w-full input-field px-4 py-3" />
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-2">О себе</label>
@@ -97,48 +95,34 @@
                 </div>
             </div>
 
-            <!-- Образование -->
+            <!-- Образование и достижения -->
             <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Образование</h2>
-                <div id="education-section" class="space-y-4">
-                    <div class="education-item border border-gray-200 rounded-lg p-4">
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Степень</label>
-                                <input name="education_degree[]" class="w-full input-field px-3 py-2" placeholder="Бакалавр" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Учебное заведение</label>
-                                <input name="education_institution[]" class="w-full input-field px-3 py-2" placeholder="МФТИ" />
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Год окончания</label>
-                                <input name="education_year[]" type="number" class="w-full input-field px-3 py-2" placeholder="2024" />
-                            </div>
-                        </div>
+                <h3 class="font-display font-semibold text-xl mb-4" style="color: #6C37AF;">11-12. Образование и достижения</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Учебное заведение</label>
+                        <input name="education_institution" class="w-full input-field px-4 py-3" placeholder="МФТИ" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Степень образования</label>
+                        <select name="education_degree" class="w-full input-field px-4 py-3">
+                            <option value="">Выберите</option>
+                            <option value="bachelor">Бакалавр</option>
+                            <option value="master">Магистр</option>
+                            <option value="phd">Кандидат наук</option>
+                            <option value="doctorate">Доктор наук</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Достижения (через запятую)</label>
+                        <input name="achievements" class="w-full input-field px-4 py-3" placeholder="Победитель конкурса 'Большая перемена', Публикация в Nature" />
                     </div>
                 </div>
-                <button type="button" onclick="addEducation()" class="btn-secondary text-white px-4 py-2 text-sm">
-                    <i class="fas fa-plus mr-2"></i>Добавить образование
-                </button>
-            </div>
-
-            <!-- Достижения -->
-            <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Достижения</h2>
-                <div id="achievements-section" class="space-y-4">
-                    <div class="achievement-item border border-gray-200 rounded-lg p-4">
-                        <input name="achievements[]" class="w-full input-field px-3 py-2" placeholder="Победитель конкурса 'Большая перемена'" />
-                    </div>
-                </div>
-                <button type="button" onclick="addAchievement()" class="btn-secondary text-white px-4 py-2 text-sm">
-                    <i class="fas fa-plus mr-2"></i>Добавить достижение
-                </button>
             </div>
 
             <!-- Социальные сети -->
             <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Социальные сети</h2>
+                <h3 class="font-display font-semibold text-xl mb-4" style="color: #6C37AF;">13-15. Социальные сети и ссылки</h3>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">LinkedIn</label>
@@ -155,34 +139,13 @@
                 </div>
             </div>
 
-            <!-- Дополнительная информация -->
+            <!-- Мотивация -->
             <div>
-                <h2 class="font-display font-semibold text-2xl mb-6" style="color: #6C37AF;">Дополнительная информация</h2>
-                <div class="grid md:grid-cols-2 gap-6">
+                <h3 class="font-display font-semibold text-xl mb-4" style="color: #6C37AF;">16. Мотивация</h3>
+                <div class="grid gap-6">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Год рождения</label>
-                        <input name="birth_year" type="number" min="1950" max="2010" class="w-full input-field px-4 py-3" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Пол</label>
-                        <select name="gender" class="w-full input-field px-4 py-3">
-                            <option value="">Не указано</option>
-                            <option value="male">Мужской</option>
-                            <option value="female">Женский</option>
-                            <option value="other">Другой</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Языки (через запятую)</label>
-                        <input name="languages" placeholder="Русский, English, Deutsch" class="w-full input-field px-4 py-3" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Сертификаты (через запятую)</label>
-                        <input name="certifications" placeholder="AWS Certified, PMP" class="w-full input-field px-4 py-3" />
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Мотивация участия в проектах</label>
-                        <textarea name="motivation" rows="3" class="w-full input-field px-4 py-3" placeholder="Почему вы хотите участвовать в проектах на платформе?"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Почему вы хотите участвовать в проектах на платформе?</label>
+                        <textarea name="motivation" rows="4" class="w-full input-field px-4 py-3" placeholder="Расскажите о ваших целях и интересах..."></textarea>
                     </div>
                 </div>
             </div>
@@ -204,53 +167,6 @@
     <script>
         const API_BASE = 'http://localhost:8000';
 
-        function addEducation() {
-            const section = document.getElementById('education-section');
-            const newItem = document.createElement('div');
-            newItem.className = 'education-item border border-gray-200 rounded-lg p-4';
-            newItem.innerHTML = `
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Степень</label>
-                        <input name="education_degree[]" class="w-full input-field px-3 py-2" placeholder="Бакалавр" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Учебное заведение</label>
-                        <input name="education_institution[]" class="w-full input-field px-3 py-2" placeholder="МФТИ" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Год окончания</label>
-                        <input name="education_year[]" type="number" class="w-full input-field px-3 py-2" placeholder="2024" />
-                    </div>
-                </div>
-                <button type="button" onclick="removeEducation(this)" class="mt-2 text-red-600 hover:text-red-800 text-sm">
-                    <i class="fas fa-trash mr-1"></i>Удалить
-                </button>
-            `;
-            section.appendChild(newItem);
-        }
-
-        function removeEducation(button) {
-            button.parentElement.remove();
-        }
-
-        function addAchievement() {
-            const section = document.getElementById('achievements-section');
-            const newItem = document.createElement('div');
-            newItem.className = 'achievement-item border border-gray-200 rounded-lg p-4';
-            newItem.innerHTML = `
-                <input name="achievements[]" class="w-full input-field px-3 py-2" placeholder="Победитель конкурса 'Большая перемена'" />
-                <button type="button" onclick="removeAchievement(this)" class="mt-2 text-red-600 hover:text-red-800 text-sm">
-                    <i class="fas fa-trash mr-1"></i>Удалить
-                </button>
-            `;
-            section.appendChild(newItem);
-        }
-
-        function removeAchievement(button) {
-            button.parentElement.remove();
-        }
-
         function parseList(value) {
             if (!value) return [];
             return value.split(',').map(s => s.trim()).filter(Boolean);
@@ -260,28 +176,6 @@
             e.preventDefault();
             const form = e.target;
             
-            // Собираем данные образования
-            const education = [];
-            const degrees = form.querySelectorAll('input[name="education_degree[]"]');
-            const institutions = form.querySelectorAll('input[name="education_institution[]"]');
-            const years = form.querySelectorAll('input[name="education_year[]"]');
-            
-            for (let i = 0; i < degrees.length; i++) {
-                if (degrees[i].value && institutions[i].value && years[i].value) {
-                    education.push({
-                        degree: degrees[i].value,
-                        institution: institutions[i].value,
-                        year: parseInt(years[i].value)
-                    });
-                }
-            }
-
-            // Собираем достижения
-            const achievements = [];
-            form.querySelectorAll('input[name="achievements[]"]').forEach(input => {
-                if (input.value) achievements.push(input.value);
-            });
-
             const data = {
                 first_name: form.first_name.value,
                 last_name: form.last_name.value,
@@ -292,23 +186,24 @@
                 bio: form.bio.value || null,
                 skills: parseList(form.skills.value),
                 experience_years: form.experience_years.value ? parseInt(form.experience_years.value) : 0,
-                education: education,
-                achievements: achievements,
+                education: form.education_institution.value ? [{
+                    degree: form.education_degree.value || 'bachelor',
+                    institution: form.education_institution.value,
+                    year: new Date().getFullYear()
+                }] : [],
+                achievements: parseList(form.achievements.value),
                 social_links: {
                     linkedin: form.linkedin.value || null,
                     github: form.github.value || null,
                     website: form.website.value || null
                 },
                 location: form.location.value || null,
-                birth_year: form.birth_year.value ? parseInt(form.birth_year.value) : null,
-                gender: form.gender.value || null,
-                languages: parseList(form.languages.value),
-                certifications: parseList(form.certifications.value),
                 motivation: form.motivation.value || null
             };
 
             const notice = document.getElementById('notice');
             notice.className = 'mt-4 text-sm text-gray-700';
+            notice.classList.remove('hidden');
             notice.textContent = 'Регистрация...';
 
             try {
