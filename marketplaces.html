@@ -28,18 +28,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-flask text-white text-sm"></i>
-                        </div>
-                        <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
-                    </div>
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="Логотип.svg" alt="Конфорка" class="h-10" />
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
-                    <a href="marketplaces.html" class="text-[#0062F5] font-semibold">Маркетплейсы</a>
-                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Команда</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button class="text-gray-700 hover:text-blue-600 transition-colors">
@@ -97,15 +94,33 @@
                             <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
                             
                             <div class="mb-6">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Категория</label>
-                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                    <option>Все категории</option>
-                                    <option>Биология</option>
-                                    <option>Физика</option>
-                                    <option>Химия</option>
-                                    <option>IT и программирование</option>
-                                    <option>Инженерия</option>
-                                    <option>Медицина</option>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Технологический стек</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                    <option>Все стеки</option>
+                                    <option>IT & Software</option>
+                                    <option>Искусственный интеллект</option>
+                                    <option>Робототехника и дроны</option>
+                                    <option>Биотех и медицина</option>
+                                    <option>Новые материалы и химия</option>
+                                    <option>Энергетика</option>
+                                    <option>Зелёные технологии</option>
+                                    <option>Аэрокосмос</option>
+                                    <option>Приборостроение</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Отрасль применения</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                    <option>Все отрасли</option>
+                                    <option>Промышленность и производство</option>
+                                    <option>Сельское хозяйство</option>
+                                    <option>Строительство и урбанистика</option>
+                                    <option>Транспорт и логистика</option>
+                                    <option>Ритейл и E-commerce</option>
+                                    <option>Медиа и развлечения</option>
+                                    <option>Государственный сектор</option>
+                                    <option>Экология</option>
                                 </select>
                             </div>
 
@@ -449,15 +464,28 @@
                             <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
                             
                             <div class="mb-6">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Область экспертизы</label>
-                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                    <option>Все области</option>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Технологический стек</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                    <option>Все стеки</option>
+                                    <option>IT & Software</option>
+                                    <option>Искусственный интеллект</option>
                                     <option>Биотехнологии</option>
-                                    <option>ИТ и программирование</option>
                                     <option>Материаловедение</option>
                                     <option>Энергетика</option>
+                                    <option>Финтех</option>
+                                    <option>Образование</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Отрасль применения</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                    <option>Все отрасли</option>
+                                    <option>Промышленность</option>
+                                    <option>Медицина и здравоохранение</option>
                                     <option>Финансы и инвестиции</option>
                                     <option>Маркетинг и продажи</option>
+                                    <option>Государственный сектор</option>
                                 </select>
                             </div>
 
@@ -920,13 +948,23 @@
         }
 
         // Add click handlers for buttons
+        function checkAuth(action) {
+            const token = localStorage.getItem('konforka_token');
+            if (!token) {
+                alert('Для доступа к этой функции необходимо зарегистрироваться.');
+                window.location.href = 'register.html';
+                return false;
+            }
+            return true;
+        }
+
         document.querySelectorAll('button').forEach(button => {
             button.addEventListener('click', (e) => {
                 if (button.textContent.includes('Присоединиться') || 
                     button.textContent.includes('Забронировать') || 
                     button.textContent.includes('Подать заявку')) {
                     e.preventDefault();
-                    alert('Функция будет доступна после регистрации в системе!');
+                    checkAuth('action');
                 }
             });
         });

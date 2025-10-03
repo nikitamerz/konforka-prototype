@@ -61,31 +61,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
-                                <circle cx="12" cy="12" r="2" fill="white"/>
-                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="font-display font-bold text-xl" style="color: #6C37AF;">Конфорка</span>
-                    </div>
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="Логотип.svg" alt="Конфорка" class="h-10" />
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
-                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
-                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-[#6C37AF] font-semibold">Оборудование</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Команда</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button class="text-gray-700 hover:text-[#0062F5] transition-colors">Войти</button>
@@ -98,7 +82,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-20 pb-16" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+    <section class="pt-20 pb-16" style="background: #6C37AF;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
             <h1 class="font-display font-bold text-4xl md:text-5xl mb-6">
                 Аренда научного оборудования
@@ -122,7 +106,7 @@
                 <!-- Самообслуживание -->
                 <div class="rental-mode" onclick="selectMode('self-service')">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4" style="background: #6C37AF;">
                             <i class="fas fa-user text-white"></i>
                         </div>
                         <h3 class="font-display font-semibold text-xl">Самообслуживание</h3>
@@ -181,14 +165,14 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 3D-принтеры -->
                 <div class="modern-card p-6">
-                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+                    <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4" style="background: #6C37AF;">
                         <i class="fas fa-cube text-white text-2xl"></i>
                     </div>
                     <h3 class="font-display font-semibold text-xl mb-3">3D-принтеры</h3>
                     <p class="text-gray-600 mb-4">FDM, SLA, SLS принтеры для прототипирования</p>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">от 500₽/час</span>
-                        <button class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
+                        <button onclick="checkAuth('equipment')" class="modern-button text-white px-4 py-2 text-sm">Посмотреть</button>
                     </div>
                 </div>
 
@@ -351,7 +335,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+    <section class="py-16" style="background: #6C37AF;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
             <h2 class="font-display font-bold text-3xl mb-4">Готовы начать?</h2>
             <p class="text-xl opacity-90 mb-8">Найдите нужное оборудование и начните свой проект уже сегодня</p>
@@ -367,6 +351,16 @@
     </section>
 
     <script>
+        function checkAuth(action) {
+            const token = localStorage.getItem('konforka_token');
+            if (!token) {
+                alert('Для доступа к функциям бронирования необходимо зарегистрироваться.');
+                window.location.href = 'register.html';
+                return false;
+            }
+            return true;
+        }
+
         function selectMode(mode) {
             // Убираем выделение со всех режимов
             document.querySelectorAll('.rental-mode').forEach(el => {
