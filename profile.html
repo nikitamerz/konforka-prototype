@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
+        .btn-secondary { background: #9CA3AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-secondary:hover { background: #6B7280; transform: translateY(-2px); }
+        .star-rating { color: #fbbf24; }
+        .star-rating.empty { color: #d1d5db; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
+                        </div>
+                        <span class="font-display font-bold text-xl text-black">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-[#6C37AF] rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">А</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-[#6C37AF] text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-3xl md:text-4xl mb-2">Профиль пользователя</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+            </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Profile Info -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="text-center">
+                            <div class="w-24 h-24 bg-[#6C37AF] rounded-full mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white text-2xl font-bold">АИ</span>
+                            </div>
+                            <h2 class="font-display font-bold text-xl mb-2">Алексей Иванов</h2>
+                            <p class="text-gray-600 mb-4">Исследователь в области биотехнологий</p>
+
+                            <!-- Rating -->
+                            <div class="flex items-center justify-center mb-4">
+                                <div class="flex text-yellow-400 mr-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.8 (23 отзыва)</span>
+                            </div>
+
+                            <!-- Stats -->
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-[#6C37AF]">12</div>
+                                    <div class="text-sm text-gray-600">Проектов</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-[#6C37AF]">156</div>
+                                    <div class="text-sm text-gray-600">Часов аренды</div>
+                                </div>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Биотехнологии</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Молекулярная биология</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Генетика</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews and Activity -->
+                <div class="lg:col-span-2">
+                    <!-- Reviews Section -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-display font-semibold text-xl">Отзывы</h3>
+                            <button class="btn-secondary text-white px-4 py-2 text-sm">
+                                <i class="fas fa-plus mr-2"></i>Оставить отзыв
+                            </button>
+                        </div>
+
+                        <!-- Review 1 -->
+                        <div class="border-b border-gray-200 pb-6 mb-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">МС</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium">Мария Смирнова</h4>
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        Отличный специалист! Алексей помог нам с настройкой лабораторного оборудования.
+                                        Очень профессиональный подход и глубокие знания в биотехнологиях.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Профессионализм</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Глубокие знания</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Помощь в настройке</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500">2 недели назад</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="border-b border-gray-200 pb-6 mb-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">ДК</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium">Дмитрий Козлов</h4>
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        Работали вместе над проектом по анализу данных. Алексей быстро разобрался в задаче
+                                        и предложил эффективное решение. Рекомендую!
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Быстрое решение</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Эффективность</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500">1 месяц назад</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">ЕП</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-medium">Елена Петрова</h4>
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-3">
+                                        Прекрасный ментор! Помог с планированием экспериментов и интерпретацией результатов.
+                                        Очень терпеливый и объясняет сложные вещи простыми словами.
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Менторство</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Терпение</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Простые объяснения</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500">2 месяца назад</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Section -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="font-display font-semibold text-xl mb-6">Недавняя активность</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-green-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm">Завершил проект "Биосенсоры для диагностики"</p>
+                                    <p class="text-xs text-gray-500">3 дня назад</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-calendar text-blue-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm">Забронировал оборудование в МГУ</p>
+                                    <p class="text-xs text-gray-500">5 дней назад</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-users text-purple-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm">Присоединился к проекту "Анализ генома"</p>
+                                    <p class="text-xs text-gray-500">1 неделя назад</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-star text-orange-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm">Получил положительный отзыв от команды</p>
+                                    <p class="text-xs text-gray-500">2 недели назад</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

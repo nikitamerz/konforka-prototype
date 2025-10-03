@@ -11,10 +11,10 @@
     <style>
         body { font-family: 'Source Sans Pro', sans-serif; }
         .font-display { font-family: 'Inter', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #2563EB, #0891B2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
-        .tab-active { background: linear-gradient(135deg, #2563EB, #0891B2); color: white; }
+        .tab-active { background: #6C37AF; color: white; }
         .tab-inactive { background: white; color: #6B7280; border: 1px solid #E5E7EB; }
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
         .equipment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
@@ -29,20 +29,21 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-flask text-white text-sm"></i>
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
                         </div>
                         <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
-                    <a href="marketplaces.html" class="text-[#0062F5] font-semibold">Маркетплейсы</a>
-                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                    <a href="index.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Главная</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="text-gray-700 hover:text-blue-600 transition-colors">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
                         <i class="fas fa-bell"></i>
                     </button>
                     <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
@@ -55,7 +56,7 @@
 
     <div class="pt-16">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-[#6C37AF] to-[#0062F5] text-white py-12">
+        <div class="bg-[#6C37AF] text-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Маркетплейсы</h1>
                 <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>

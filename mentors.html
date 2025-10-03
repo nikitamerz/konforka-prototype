@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менторы - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
+        .btn-secondary { background: #9CA3AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-secondary:hover { background: #6B7280; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
+                        </div>
+                        <span class="font-display font-bold text-xl text-black">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Главная</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-[#6C37AF] font-semibold">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-[#6C37AF] rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">А</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-[#6C37AF] text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Менторы</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <p class="text-xl opacity-90 max-w-2xl">
+                    Получайте консультации от экспертов и предпринимателей
+                </p>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filters Sidebar -->
+                <div class="lg:w-1/4">
+                    <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                        <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Область экспертизы</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                <option>Все области</option>
+                                <option>Биотехнологии</option>
+                                <option>ИТ и программирование</option>
+                                <option>Материаловедение</option>
+                                <option>Энергетика</option>
+                                <option>Финансы и инвестиции</option>
+                                <option>Маркетинг и продажи</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Опыт работы</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="experience" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">От 5 лет</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="experience" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">От 10 лет</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="experience" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">От 20 лет</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Стоимость консультации</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">До 3,000 ₽/час</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">3,000-10,000 ₽/час</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" class="text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">От 10,000 ₽/час</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="w-full btn-primary text-white py-2">
+                            Применить фильтры
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mentors Grid -->
+                <div class="lg:w-3/4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-display font-semibold text-2xl">Менторы и эксперты</h2>
+                        <button class="btn-secondary text-white px-6 py-2">
+                            <i class="fas fa-plus mr-2"></i>Стать ментором
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Mentor Card 1 -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                            <div class="text-center mb-4">
+                                <div class="w-20 h-20 bg-[#6C37AF] rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">АС</span>
+                                </div>
+                                <h3 class="font-display font-semibold text-lg">Алексей Смирнов</h3>
+                                <p class="text-sm text-gray-500">CEO BioTech Solutions</p>
+                                <div class="flex items-center justify-center mt-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-600">4.9 (47 отзывов)</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-gray-600 text-sm mb-3">
+                                    15 лет в биотехнологиях. Основал 3 успешных стартапа.
+                                    Эксперт в фандрайзинге и выводе продуктов на рынок.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Биотехнологии</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Фандрайзинг</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Маркетинг</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-xl font-bold text-[#6C37AF]">5,000 ₽</span>
+                                    <span class="text-gray-500 text-sm">/час</span>
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-1"></i>60 минут
+                                </div>
+                            </div>
+                            <button class="w-full btn-primary text-white py-2">
+                                Забронировать консультацию
+                            </button>
+                        </div>
+
+                        <!-- Mentor Card 2 -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                            <div class="text-center mb-4">
+                                <div class="w-20 h-20 bg-gray-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">МК</span>
+                                </div>
+                                <h3 class="font-display font-semibold text-lg">Мария Козлова</h3>
+                                <p class="text-sm text-gray-500">CTO DataScience Corp</p>
+                                <div class="flex items-center justify-center mt-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-600">4.7 (32 отзыва)</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-gray-600 text-sm mb-3">
+                                    12 лет в Data Science. PhD в области машинного обучения.
+                                    Помогает стартапам с AI и анализом данных.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Machine Learning</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Data Science</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Python</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-xl font-bold text-[#6C37AF]">4,000 ₽</span>
+                                    <span class="text-gray-500 text-sm">/час</span>
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-1"></i>45 минут
+                                </div>
+                            </div>
+                            <button class="w-full btn-primary text-white py-2">
+                                Забронировать консультацию
+                            </button>
+                        </div>
+
+                        <!-- Mentor Card 3 -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                            <div class="text-center mb-4">
+                                <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">ИП</span>
+                                </div>
+                                <h3 class="font-display font-semibold text-lg">Игорь Петров</h3>
+                                <p class="text-sm text-gray-500">Инвестор, бизнес-ангел</p>
+                                <div class="flex items-center justify-center mt-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-600">4.8 (28 отзывов)</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-gray-600 text-sm mb-3">
+                                    20 лет в венчурных инвестициях. Инвестировал в 50+ стартапов.
+                                    Помогает с привлечением инвестиций и стратегией развития.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Инвестиции</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Стратегия</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Масштабирование</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-xl font-bold text-[#6C37AF]">8,000 ₽</span>
+                                    <span class="text-gray-500 text-sm">/час</span>
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-clock mr-1"></i>60 минут
+                                </div>
+                            </div>
+                            <button class="w-full btn-primary text-white py-2">
+                                Забронировать консультацию
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
