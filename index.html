@@ -14,7 +14,7 @@
         .font-display { font-family: 'Inter', sans-serif; }
         .vanta-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .hero-content { position: relative; z-index: 10; }
-        .gradient-text { background: linear-gradient(135deg, #6C37AF, #0062F5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(135deg, #6C37AF, #000000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .pulse-animation { animation: pulse 2s infinite; }
@@ -53,12 +53,12 @@
             transform: translateY(-2px); 
         }
         .modern-button-secondary { 
-            background: #0062F5; 
+            background: #000000; 
             border-radius: 12px; 
             transition: all 0.3s; 
         }
         .modern-button-secondary:hover { 
-            background: #0052CC; 
+            background: #333333; 
             transform: translateY(-2px); 
         }
         .pill-button {
@@ -84,31 +84,14 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
-                                <circle cx="12" cy="12" r="2" fill="white"/>
-                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="font-display font-bold text-xl" style="color: #6C37AF;">Конфорка</span>
+                        <img src="Логотип.svg" alt="Конфорка" class="h-8 w-auto">
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
-                    <a href="equipment.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Оборудование</a>
-                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
-                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">R&D Заказы</a>
-                    <a href="projects.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Проекты</a>
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentorship.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторство</a>
+                    <a href="rd-orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button class="text-gray-700 hover:text-[#0062F5] transition-colors">Войти</button>
@@ -128,7 +111,7 @@
                 <h1 class="font-display font-bold text-5xl md:text-7xl mb-2 leading-tight" style="color:#6C37AF;">
                     Конфорка
                 </h1>
-                <p class="text-sm mb-4" style="color:#0062F5;">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <p class="text-sm mb-4" style="color:#000000;">для тех, кто горит идеей • серая обложка, яркие дела</p>
                 <h2 class="font-display font-bold text-3xl md:text-4xl mb-6" style="color:#111827;">
                     Суперприложение для развития науки
                 </h2>
@@ -137,7 +120,7 @@
                     Четыре маркетплейса в одном решении: Проекты, Оборудование, Менторство, R&D Заказы.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="marketplaces.html" class="modern-button text-white px-8 py-4 text-lg font-semibold">
+                    <a href="projects.html" class="modern-button text-white px-8 py-4 text-lg font-semibold">
                         Начать исследование
                     </a>
                     <a href="#features" class="modern-button-secondary text-white px-8 py-4 text-lg font-semibold">
@@ -363,7 +346,7 @@
     </section>
 
     <!-- Statistics -->
-    <section id="stats" class="py-20 text-white" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
+    <section id="stats" class="py-20 text-white" style="background: linear-gradient(135deg, #6C37AF, #000000);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div class="scroll-reveal">
@@ -415,23 +398,7 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #6C37AF, #0062F5);">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="8" fill="url(#gradient)" stroke="#0062F5" stroke-width="1"/>
-                                <circle cx="12" cy="12" r="2" fill="white"/>
-                                <line x1="12" y1="4" x2="12" y2="8" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="12" y1="16" x2="12" y2="20" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="4" y1="12" x2="8" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="16" y1="12" x2="20" y2="12" stroke="#0062F5" stroke-width="2" stroke-linecap="round"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#6C37AF;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#0062F5;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        <span class="font-display font-bold text-xl">Конфорка</span>
+                        <img src="Логотип.svg" alt="Конфорка" class="h-8 w-auto">
                         <span class="ml-3 text-sm text-gray-400">для тех, кто горит идеей</span>
                     </div>
                     <p class="text-gray-400 mb-4 max-w-md">
@@ -453,10 +420,10 @@
                 <div>
                     <h3 class="font-display font-semibold text-lg mb-4">Продукт</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Маркетплейс проектов</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Аренда оборудования</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Система менторства</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">R&D заказы</a></li>
+                        <li><a href="projects.html" class="hover:text-white transition-colors">Проекты</a></li>
+                        <li><a href="equipment.html" class="hover:text-white transition-colors">Оборудование</a></li>
+                        <li><a href="mentorship.html" class="hover:text-white transition-colors">Менторство</a></li>
+                        <li><a href="rd-orders.html" class="hover:text-white transition-colors">R&D заказы</a></li>
                     </ul>
                 </div>
                 <div>
