@@ -59,8 +59,25 @@ CREATE TABLE projects (
     -- Оборудование и ресурсы
     required_equipment JSONB, -- [{equipment_id, quantity, priority}]
     budget_estimate DECIMAL(12,2),
-    -- Детализированные 16 полей концепции (гибко в JSONB)
-    details JSONB,
+    -- Детализированные поля концепции для сбора датасета
+    problem TEXT, -- Что нужно решить?
+    problem_type VARCHAR(100), -- Личная боль, Наблюдение за другими, Научное любопытство, Заказ от компании, Социальный вызов
+    history TEXT, -- Описание момента, когда столкнулись с проблемой
+    inspiration_source TEXT, -- Какая статья, книга, разговор или событие подтолкнуло
+    inspiration_type VARCHAR(100), -- Научная статья, Книга, Разговор с другом, Аналогия из природы, Аналогия из другой отрасли, Ошибка/Случайность
+    solution TEXT, -- Краткое описание решения
+    value_proposition TEXT, -- Как проект полезен каждой целевой аудитории
+    eureka_moment TEXT, -- Описание момента озарения
+    insight_type VARCHAR(100), -- Внезапное озарение, Долгое размышление, Результат эксперимента, Мозговой штурм с командой
+    analogies TEXT, -- Сравнение с другими устройствами/сервисами
+    novelty TEXT, -- Чем отличается от аналогов
+    first_steps TEXT, -- Первые 5 шагов реализации
+    help_needed TEXT, -- Какие профессионалы нужны
+    project_direction_level1 VARCHAR(100), -- Тип проекта (стартап, исследование, социальный)
+    project_direction_level2 TEXT[], -- Стек и отрасль (множественный выбор)
+    current_status VARCHAR(100), -- Идея, Формирование команды, Исследование, Прототипирование, Тестирование, Масштабирование, Заморожен, Успешен
+    results JSONB, -- Для успешных проектов: гранты, инвестиции, продажи и т.д.
+    failure_reason TEXT, -- Для нереализованных проектов
     
     -- Автор проекта
     author_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -78,6 +95,75 @@ CREATE TABLE projects (
     started_at TIMESTAMP,
     completed_at TIMESTAMP
 );
+
+-- Таблица эволюции проектов для сбора датасета
+CREATE TABLE project_snapshots (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+    snapshot_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Снимок состояния проекта
+    project_data JSONB NOT NULL,
+
+    -- Участники команды на момент снимка
+    team_members JSONB,
+
+    -- Связанные события
+    triggered_by_event VARCHAR(100), -- status_change, team_member_joined, equipment_booked, etc.
+    event_data JSONB,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица для хранения истории действий пользователей
+CREATE TABLE user_actions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    action_type VARCHAR(100) NOT NULL, -- project_view, project_join, equipment_search, mentor_consultation
+    action_data JSONB,
+
+    -- Контекст действия
+    project_id UUID REFERENCES projects(id),
+    equipment_id UUID REFERENCES equipment(id),
+    mentor_id UUID REFERENCES mentors(id),
+    rd_order_id UUID REFERENCES rd_orders(id),
+
+    session_id VARCHAR(255),
+    ip_address INET,
+    user_agent TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица для хранения поисковых запросов и их результатов
+CREATE TABLE search_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+
+    search_type VARCHAR(50) NOT NULL, -- projects, equipment, mentors, rd_orders
+    search_query TEXT NOT NULL,
+    filters_used JSONB,
+
+    results_count INTEGER,
+    results_shown JSONB, -- ID и позиции показанных результатов
+
+    clicked_result_id UUID, -- какой результат кликнули
+    click_position INTEGER,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Индексы для новых таблиц
+CREATE INDEX idx_project_snapshots_project_id ON project_snapshots(project_id);
+CREATE INDEX idx_project_snapshots_snapshot_date ON project_snapshots(snapshot_date);
+
+CREATE INDEX idx_user_actions_user_id ON user_actions(user_id);
+CREATE INDEX idx_user_actions_action_type ON user_actions(action_type);
+CREATE INDEX idx_user_actions_created_at ON user_actions(created_at);
+
+CREATE INDEX idx_search_logs_user_id ON search_logs(user_id);
+CREATE INDEX idx_search_logs_search_type ON search_logs(search_type);
+CREATE INDEX idx_search_logs_created_at ON search_logs(created_at);
 
 -- Таблица команд и участников
 CREATE TABLE team_members (

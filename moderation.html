@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модерация - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
+        .btn-secondary { background: #9CA3AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-secondary:hover { background: #6B7280; transform: translateY(-2px); }
+        .btn-warning { background: #f59e0b; border-radius: 12px; transition: all 0.3s; }
+        .btn-warning:hover { background: #d97706; transform: translateY(-2px); }
+        .btn-danger { background: #ef4444; border-radius: 12px; transition: all 0.3s; }
+        .btn-danger:hover { background: #dc2626; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
+                        </div>
+                        <span class="font-display font-bold text-xl text-black">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-[#6C37AF] rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">М</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-[#6C37AF] text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-3xl md:text-4xl mb-2">Модерация платформы</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+            </div>
+        </div>
+
+        <!-- Moderation Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Reports Section -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-display font-semibold text-xl">Жалобы пользователей</h3>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">5 активных</span>
+                    </div>
+
+                    <!-- Report 1 -->
+                    <div class="border border-red-200 rounded-lg p-4 mb-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-semibold">АП</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Алексей Петров</h4>
+                                    <p class="text-xs text-gray-500">Пожаловался на спам</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-gray-500">2 мин назад</span>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-red-400 p-3 mb-3">
+                            <p class="text-sm text-gray-700">
+                                "Пользователь @spam_bot отправляет нежелательные сообщения в чат проекта.
+                                Просьба заблокировать аккаунт и удалить все сообщения."
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex space-x-2">
+                                <button class="btn-warning text-white px-3 py-1 text-sm">Предупреждение</button>
+                                <button class="btn-danger text-white px-3 py-1 text-sm">Блокировка</button>
+                            </div>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Подробнее
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report 2 -->
+                    <div class="border border-orange-200 rounded-lg p-4 mb-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-semibold">МС</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Мария Смирнова</h4>
+                                    <p class="text-xs text-gray-500">Пожаловалась на мошенничество</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-gray-500">15 мин назад</span>
+                        </div>
+                        <div class="bg-orange-50 border-l-4 border-orange-400 p-3 mb-3">
+                            <p class="text-sm text-gray-700">
+                                "Ментор @fake_mentor требует предоплату за консультацию, но не предоставляет
+                                никаких гарантий. Подозреваю мошенничество."
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex space-x-2">
+                                <button class="btn-warning text-white px-3 py-1 text-sm">Проверить</button>
+                                <button class="btn-danger text-white px-3 py-1 text-sm">Блокировка</button>
+                            </div>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Подробнее
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report 3 -->
+                    <div class="border border-yellow-200 rounded-lg p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-semibold">ДК</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Дмитрий Козлов</h4>
+                                    <p class="text-xs text-gray-500">Пожаловался на оскорбление</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-gray-500">1 час назад</span>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                            <p class="text-sm text-gray-700">
+                                "В комментариях к проекту пользователь @troll использует нецензурную лексику
+                                и оскорбляет других участников."
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex space-x-2">
+                                <button class="btn-warning text-white px-3 py-1 text-sm">Предупреждение</button>
+                                <button class="btn-danger text-white px-3 py-1 text-sm">Блокировка</button>
+                            </div>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">
+                                <i class="fas fa-eye mr-1"></i>Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Section -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-display font-semibold text-xl">Управление пользователями</h3>
+                        <button class="btn-secondary text-white px-4 py-2 text-sm">
+                            <i class="fas fa-search mr-2"></i>Поиск
+                        </button>
+                    </div>
+
+                    <!-- User 1 -->
+                    <div class="border border-gray-200 rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">СП</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Сергей Петров</h4>
+                                    <p class="text-sm text-gray-500">spam_bot@example.com</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Спамер</span>
+                        </div>
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Жалоб: 5</span>
+                                <span>Нарушений: 3</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="btn-warning text-white px-3 py-1 text-sm">Предупредить</button>
+                            <button class="btn-danger text-white px-3 py-1 text-sm">Заблокировать</button>
+                        </div>
+                    </div>
+
+                    <!-- User 2 -->
+                    <div class="border border-gray-200 rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">АИ</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Анна Иванова</h4>
+                                    <p class="text-sm text-gray-500">anna@example.com</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Надежный</span>
+                        </div>
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Жалоб: 0</span>
+                                <span>Нарушений: 0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="btn-secondary text-white px-3 py-1 text-sm">Профиль</button>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">История</button>
+                        </div>
+                    </div>
+
+                    <!-- User 3 -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">МК</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Максим Козлов</h4>
+                                    <p class="text-sm text-gray-500">max@example.com</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Предупрежден</span>
+                        </div>
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Жалоб: 2</span>
+                                <span>Нарушений: 1</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="btn-warning text-white px-3 py-1 text-sm">Предупредить</button>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">История</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="mt-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="font-display font-semibold text-xl mb-6">Статистика модерации</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-red-600 mb-2">23</div>
+                            <div class="text-sm text-gray-600">Активных жалоб</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-orange-600 mb-2">156</div>
+                            <div class="text-sm text-gray-600">Обработано сегодня</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">12</div>
+                            <div class="text-sm text-gray-600">Заблокировано</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">98.5%</div>
+                            <div class="text-sm text-gray-600">Уровень удовлетворенности</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Moderation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle report actions
+            document.querySelectorAll('.btn-warning, .btn-danger').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    const reportCard = this.closest('.border');
+
+                    if (action === 'Предупреждение' || action === 'Проверить') {
+                        // Show warning modal or process warning
+                        alert(`Действие "${action}" будет выполнено`);
+                    } else if (action === 'Блокировка') {
+                        // Show confirmation dialog
+                        if (confirm('Вы уверены, что хотите заблокировать пользователя?')) {
+                            reportCard.style.opacity = '0.5';
+                            this.textContent = 'Заблокирован';
+                            this.classList.remove('btn-danger');
+                            this.classList.add('btn-secondary');
+                        }
+                    }
+                });
+            });
+
+            // Handle user management actions
+            document.querySelectorAll('.border').forEach(userCard => {
+                const buttons = userCard.querySelectorAll('button');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const action = this.textContent.trim();
+                        if (action === 'Профиль') {
+                            alert('Перенаправление в профиль пользователя');
+                        } else if (action === 'История') {
+                            alert('Показать историю действий пользователя');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

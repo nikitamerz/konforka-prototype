@@ -3,34 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проекты и команды - Конфорка</title>
+    <title>Проекты - Конфорка</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Source Sans Pro', sans-serif; }
         .font-display { font-family: 'Inter', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #2563EB, #0891B2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
-        .project-card { border-left: 4px solid #2563EB; }
-        .task-item { border-left: 3px solid #E5E7EB; transition: all 0.2s; }
-        .task-item:hover { border-left-color: #2563EB; background: #F8FAFC; }
-        .task-item.completed { border-left-color: #10B981; opacity: 0.7; }
-        .task-item.in-progress { border-left-color: #F59E0B; }
-        .task-item.overdue { border-left-color: #EF4444; }
-        .progress-bar { background: linear-gradient(90deg, #2563EB, #0891B2); }
-        .team-member-card { transition: all 0.3s ease; }
-        .team-member-card:hover { transform: translateY(-2px); }
-        .skill-tag { background: #F3F4F6; color: #374151; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
-        .priority-high { background: #FEE2E2; color: #DC2626; }
-        .priority-medium { background: #FEF3C7; color: #D97706; }
-        .priority-low { background: #D1FAE5; color: #059669; }
-        .kanban-column { min-height: 400px; }
-        .kanban-card { cursor: grab; transition: all 0.2s; }
-        .kanban-card:hover { transform: rotate(1deg); }
-        .kanban-card.dragging { opacity: 0.5; transform: rotate(5deg); }
+        .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
+        .btn-secondary { background: #9CA3AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-secondary:hover { background: #6B7280; transform: translateY(-2px); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -40,23 +26,24 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-flask text-white text-sm"></i>
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
                         </div>
-                        <span class="font-display font-bold text-xl gradient-text">Конфорка</span>
+                        <span class="font-display font-bold text-xl text-black">Конфорка</span>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Главная</a>
-                    <a href="marketplaces.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Маркетплейсы</a>
-                    <a href="mentorship.html" class="text-gray-700 hover:text-[#0062F5] transition-colors">Менторство</a>
-                    <a href="projects.html" class="text-[#0062F5] font-semibold">Проекты</a>
+                    <a href="index.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Главная</a>
+                    <a href="projects.html" class="text-[#6C37AF] font-semibold">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="text-gray-700 hover:text-blue-600 transition-colors">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
                         <i class="fas fa-bell"></i>
                     </button>
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                    <div class="w-8 h-8 bg-[#6C37AF] rounded-full flex items-center justify-center">
                         <span class="text-white text-sm font-semibold">А</span>
                     </div>
                 </div>
@@ -66,507 +53,223 @@
 
     <div class="pt-16">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-[#6C37AF] to-[#0062F5] text-white py-12">
+        <div class="bg-[#6C37AF] text-white py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Управление проектами</h1>
-                        <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
-                        <p class="text-xl opacity-90 max-w-2xl">
-                            Координируйте работу команд, отслеживайте прогресс и достигайте целей
-                        </p>
-                    </div>
-                    <a href="projects_new.html" class="bg-[#6C37AF] text-white px-6 py-3 rounded-lg hover:opacity-90 transition-colors font-semibold">
-                        <i class="fas fa-plus mr-2"></i>Создать проект
-                    </a>
-                </div>
+                <h1 class="font-display font-bold text-4xl md:text-5xl mb-2">Проекты</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+                <p class="text-xl opacity-90 max-w-2xl">
+                    Публикуйте идеи, собирайте команды, развивайте стартапы
+                </p>
             </div>
         </div>
 
+        <!-- Content -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Project Overview -->
-            <div class="grid md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-project-diagram text-blue-600 text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-blue-600">5</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Активных проектов</h3>
-                    <p class="text-sm text-gray-600">В работе</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-green-600">12</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Завершено</h3>
-                    <p class="text-sm text-gray-600">В этом году</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-users text-orange-600 text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-orange-600">28</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Участников</h3>
-                    <p class="text-sm text-gray-600">В командах</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-trophy text-purple-600 text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-purple-600">3</span>
-                    </div>
-                    <h3 class="font-semibold text-gray-900 mb-1">Награды</h3>
-                    <p class="text-sm text-gray-600">R&D конкурсы</p>
-                </div>
-            </div>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filters Sidebar -->
+                <div class="lg:w-1/4">
+                    <div class="bg-white rounded-xl p-6 shadow-lg sticky top-32">
+                        <h3 class="font-display font-semibold text-lg mb-4">Фильтры</h3>
 
-            <div class="grid lg:grid-cols-3 gap-8">
-                
-                <!-- Projects List -->
-                <div class="lg:col-span-2">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="font-display font-semibold text-2xl">Мои проекты</h2>
-                        <div class="flex space-x-2">
-                            <select id="project-sort" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#0062F5]">
-                                <option value="created_at">Сначала новые</option>
-                                <option value="team_size">По размеру команды</option>
-                                <option value="stage">По стадии</option>
-                                <option value="category">По категории</option>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Стек (Наука и технологии)</label>
+                            <select id="stack-filter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                <option value="">Все стеки</option>
+                                <option value="it_software">IT & Software (SaaS, Mobile, Web)</option>
+                                <option value="ai_ml">Искусственный интеллект (AI & ML)</option>
+                                <option value="robotics">Робототехника и дроны</option>
+                                <option value="biotech">Биотех и медицина (BioTech & MedTech)</option>
+                                <option value="materials">Новые материалы и химия</option>
+                                <option value="energy">Энергетика (Energy)</option>
+                                <option value="greentech">Зелёные технологии (GreenTech)</option>
+                                <option value="space">Аэрокосмос (SpaceTech)</option>
+                                <option value="electronics">Приборостроение и электроника</option>
+                                <option value="fintech">Финтех (FinTech)</option>
+                                <option value="edtech">Образование (EdTech)</option>
                             </select>
-                            <button class="bg-[#0062F5] text-white px-4 py-2 rounded-lg hover:opacity-90 transition-colors text-sm">
-                                <i class="fas fa-filter mr-1"></i>Фильтры
-                            </button>
                         </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Отрасль (Рынок и применение)</label>
+                            <select id="industry-filter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                <option value="">Все отрасли</option>
+                                <option value="industry">Промышленность и производство</option>
+                                <option value="agrotech">Сельское хозяйство (AgroTech)</option>
+                                <option value="construction">Строительство и урбанистика</option>
+                                <option value="transport">Транспорт и логистика</option>
+                                <option value="retail">Ритейл и E-commerce</option>
+                                <option value="media">Медиа и развлечения</option>
+                                <option value="govtech">Государственный сектор (GovTech)</option>
+                                <option value="ecology">Экология</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Стадия проекта</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">Идея</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">Прототип</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">Тестирование</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-[#6C37AF] focus:ring-[#6C37AF]">
+                                    <span class="ml-2 text-sm">Коммерциализация</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Необходимые навыки</label>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-[#6C37AF] text-white text-xs rounded-full cursor-pointer hover:opacity-80">Python</span>
+                                <span class="px-3 py-1 bg-[#6C37AF] text-white text-xs rounded-full cursor-pointer hover:opacity-80">ML</span>
+                                <span class="px-3 py-1 bg-[#6C37AF] text-white text-xs rounded-full cursor-pointer hover:opacity-80">MATLAB</span>
+                                <span class="px-3 py-1 bg-[#6C37AF] text-white text-xs rounded-full cursor-pointer hover:opacity-80">LabVIEW</span>
+                            </div>
+                        </div>
+
+                        <button class="w-full btn-primary text-white py-2">
+                            Применить фильтры
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="lg:w-3/4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-display font-semibold text-2xl">Активные проекты</h2>
+                        <a href="projects_new.html" class="btn-primary text-white px-6 py-2">
+                            <i class="fas fa-plus mr-2"></i>Создать проект
+                        </a>
                     </div>
 
-                    <div class="space-y-6">
-                        <!-- Project 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Project Card 1 -->
                         <div class="project-card bg-white rounded-xl p-6 shadow-lg card-hover">
                             <div class="flex items-start justify-between mb-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-dna text-blue-600 text-2xl"></i>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-dna text-blue-600"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-display font-semibold text-xl mb-1">Биосенсоры для диагностики</h3>
-                                        <p class="text-gray-600 text-sm mb-2">Разработка биосенсоров на основе графена для быстрой диагностики заболеваний</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar mr-1"></i>Начат 15 сентября</span>
-                                            <span><i class="fas fa-clock mr-1"></i>45 дней в работе</span>
-                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Активен</span>
-                                        </div>
+                                        <h3 class="font-display font-semibold text-lg">Биосенсоры для диагностики</h3>
+                                        <p class="text-sm text-gray-500">Биология • Прототип</p>
                                     </div>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <button class="text-gray-400 hover:text-blue-600 transition-colors">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="text-gray-400 hover:text-red-600 transition-colors">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Активен</span>
                             </div>
-
-                            <!-- Progress Bar -->
-                            <div class="mb-4">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm font-medium text-gray-700">Прогресс проекта</span>
-                                    <span class="text-sm text-gray-600">65%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-3">
-                                    <div class="progress-bar h-3 rounded-full" style="width: 65%"></div>
-                                </div>
-                            </div>
-
-                            <!-- Team Members -->
+                            <p class="text-gray-600 text-sm mb-4">
+                                Разработка биосенсоров на основе графена для быстрой диагностики заболеваний.
+                                Требуется поддержка в разработке электроники и программного обеспечения.
+                            </p>
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex -space-x-2">
                                     <div class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">А</span>
+                                        <span class="text-white text-xs">А</span>
                                     </div>
                                     <div class="w-8 h-8 bg-green-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">М</span>
+                                        <span class="text-white text-xs">М</span>
                                     </div>
                                     <div class="w-8 h-8 bg-purple-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">И</span>
-                                    </div>
-                                    <div class="w-8 h-8 bg-orange-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">+2</span>
+                                        <span class="text-white text-xs">+2</span>
                                     </div>
                                 </div>
-                                <span class="text-sm text-gray-600">5 участников</span>
+                                <span class="text-sm text-gray-500">3/5 участников</span>
                             </div>
-
-                            <!-- Recent Tasks -->
-                            <div class="space-y-2">
-                                <h4 class="font-semibold text-sm text-gray-700 mb-2">Активные задачи</h4>
-                                <div class="task-item in-progress bg-gray-50 rounded-lg p-3">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-flask text-yellow-600"></i>
-                                            <span class="text-sm font-medium">Тестирование биосенсоров</span>
-                                        </div>
-                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">В процессе</span>
-                                    </div>
-                                    <div class="text-xs text-gray-500 mt-1 ml-6">Ответственный: Иванов И. • До 28 октября</div>
-                                </div>
-                                <div class="task-item overdue bg-gray-50 rounded-lg p-3">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-chart-line text-red-600"></i>
-                                            <span class="text-sm font-medium">Анализ результатов экспериментов</span>
-                                        </div>
-                                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Просрочено</span>
-                                    </div>
-                                    <div class="text-xs text-gray-500 mt-1 ml-6">Ответственный: Петрова М. • До 25 октября</div>
-                                </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Биотехнологии</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Наноматериалы</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Электроника</span>
                             </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex space-x-2 mt-4">
-                                <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                                    <i class="fas fa-tasks mr-2"></i>Управление задачами
-                                </button>
-                                <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm">
-                                    <i class="fas fa-users mr-2"></i>Команда
-                                </button>
-                            </div>
+                            <button class="w-full btn-primary text-white py-2">
+                                Присоединиться
+                            </button>
                         </div>
 
-                        <!-- Project 2 -->
+                        <!-- Project Card 2 -->
                         <div class="project-card bg-white rounded-xl p-6 shadow-lg card-hover">
                             <div class="flex items-start justify-between mb-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-robot text-purple-600 text-2xl"></i>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-robot text-purple-600"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-display font-semibold text-xl mb-1">AI для анализа данных</h3>
-                                        <p class="text-gray-600 text-sm mb-2">Машинное обучение для анализа больших данных в научных исследованиях</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar mr-1"></i>Начат 1 октября</span>
-                                            <span><i class="fas fa-clock mr-1"></i>24 дня в работе</span>
-                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Идея</span>
-                                        </div>
+                                        <h3 class="font-display font-semibold text-lg">AI для анализа данных</h3>
+                                        <p class="text-sm text-gray-500">IT • Идея</p>
                                     </div>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <button class="text-gray-400 hover:text-blue-600 transition-colors">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="text-gray-400 hover:text-red-600 transition-colors">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Набор команды</span>
                             </div>
-
-                            <!-- Progress Bar -->
-                            <div class="mb-4">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm font-medium text-gray-700">Прогресс проекта</span>
-                                    <span class="text-sm text-gray-600">25%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-3">
-                                    <div class="progress-bar h-3 rounded-full" style="width: 25%"></div>
-                                </div>
-                            </div>
-
-                            <!-- Team Members -->
+                            <p class="text-gray-600 text-sm mb-4">
+                                Машинное обучение для анализа больших данных в научных исследованиях.
+                                Ищем data scientists и ML инженеров.
+                            </p>
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex -space-x-2">
                                     <div class="w-8 h-8 bg-red-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">И</span>
+                                        <span class="text-white text-xs">И</span>
                                     </div>
+                                </div>
+                                <span class="text-sm text-gray-500">1/4 участников</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Python</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">TensorFlow</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Data Science</span>
+                            </div>
+                            <button class="w-full btn-primary text-white py-2">
+                                Присоединиться
+                            </button>
+                        </div>
+
+                        <!-- Project Card 3 -->
+                        <div class="project-card bg-white rounded-xl p-6 shadow-lg card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-leaf text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-display font-semibold text-lg">Зеленая энергетика</h3>
+                                        <p class="text-sm text-gray-500">Инженерия • Тестирование</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Тестирование</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">
+                                Разработка эффективных солнечных панелей нового поколения.
+                                Нужны специалисты по материаловедению и электронике.
+                            </p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex -space-x-2">
                                     <div class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white flex items-center justify-center">
-                                        <span class="text-white text-xs font-semibold">+1</span>
+                                        <span class="text-white text-xs">С</span>
+                                    </div>
+                                    <div class="w-8 h-8 bg-green-600 rounded-full border-2 border-white flex items-center justify-center">
+                                        <span class="text-white text-xs">А</span>
+                                    </div>
+                                    <div class="w-8 h-8 bg-purple-600 rounded-full border-2 border-white flex items-center justify-center">
+                                        <span class="text-white text-xs">+3</span>
                                     </div>
                                 </div>
-                                <span class="text-sm text-gray-600">2 участника</span>
+                                <span class="text-sm text-gray-500">5/6 участников</span>
                             </div>
-
-                            <!-- Recent Tasks -->
-                            <div class="space-y-2">
-                                <h4 class="font-semibold text-sm text-gray-700 mb-2">Активные задачи</h4>
-                                <div class="task-item completed bg-gray-50 rounded-lg p-3">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-check-circle text-green-600"></i>
-                                            <span class="text-sm font-medium line-through">Сбор данных для обучения</span>
-                                        </div>
-                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Завершено</span>
-                                    </div>
-                                    <div class="text-xs text-gray-500 mt-1 ml-6">Ответственный: Сидоров А. • Завершено 20 октября</div>
-                                </div>
-                                <div class="task-item in-progress bg-gray-50 rounded-lg p-3">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-code text-yellow-600"></i>
-                                            <span class="text-sm font-medium">Разработка ML модели</span>
-                                        </div>
-                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">В процессе</span>
-                                    </div>
-                                    <div class="text-xs text-gray-500 mt-1 ml-6">Ответственный: Иванов И. • До 30 октября</div>
-                                </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Энергетика</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Материалы</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Электроника</span>
                             </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex space-x-2 mt-4">
-                                <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                                    <i class="fas fa-tasks mr-2"></i>Управление задачами
-                                </button>
-                                <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm">
-                                    <i class="fas fa-users mr-2"></i>Команда
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="lg:col-span-1 space-y-6">
-                    
-                    <!-- Quick Actions -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="font-display font-semibold text-lg mb-4">Быстрые действия</h3>
-                        <div class="space-y-3">
-                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                                <i class="fas fa-plus mr-2"></i>Новый проект
+                            <button class="w-full btn-primary text-white py-2">
+                                Присоединиться
                             </button>
-                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
-                                <i class="fas fa-user-plus mr-2"></i>Пригласить в команду
-                            </button>
-                            <button class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm">
-                                <i class="fas fa-calendar-plus mr-2"></i>Запланировать встречу
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Team Activity -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="font-display font-semibold text-lg mb-4">Активность команды</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <span class="text-white text-xs font-semibold">М</span>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-900">
-                                        <span class="font-semibold">Мария К.</span> завершила задачу "Анализ данных"
-                                    </p>
-                                    <p class="text-xs text-gray-500">2 часа назад</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <span class="text-white text-xs font-semibold">А</span>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-900">
-                                        <span class="font-semibold">Алексей С.</span> добавил новую задачу
-                                    </p>
-                                    <p class="text-xs text-gray-500">4 часа назад</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <span class="text-white text-xs font-semibold">И</span>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-gray-900">
-                                        <span class="font-semibold">Иван И.</span> обновил статус проекта
-                                    </p>
-                                    <p class="text-xs text-gray-500">6 часов назад</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Analytics -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="font-display font-semibold text-lg mb-4">Аналитика проектов</h3>
-                        <div id="project-analytics" style="height: 250px;"></div>
-                    </div>
-
-                    <!-- Upcoming Deadlines -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="font-display font-semibold text-lg mb-4">Ближайшие дедлайны</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-sm text-red-900">Анализ результатов</p>
-                                    <p class="text-xs text-red-600">Проект: Биосенсоры</p>
-                                </div>
-                                <span class="text-xs text-red-600 font-semibold">Завтра</span>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-sm text-yellow-900">ML модель</p>
-                                    <p class="text-xs text-yellow-600">Проект: AI анализ</p>
-                                </div>
-                                <span class="text-xs text-yellow-600 font-semibold">5 дней</span>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                                <div>
-                                    <p class="font-semibold text-sm text-blue-900">Тестирование</p>
-                                    <p class="text-xs text-blue-600">Проект: Биосенсоры</p>
-                                </div>
-                                <span class="text-xs text-blue-600 font-semibold">1 неделя</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kanban Board Section (Hidden by default) -->
-            <div id="kanban-board" class="mt-12 hidden">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-display font-semibold text-2xl">Доска задач</h2>
-                    <div class="flex space-x-2">
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                            <i class="fas fa-plus mr-2"></i>Новая задача
-                        </button>
-                        <button id="toggle-view" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm">
-                            <i class="fas fa-list mr-2"></i>Список
-                        </button>
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- To Do Column -->
-                    <div class="kanban-column bg-gray-100 rounded-xl p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-semibold text-gray-700">К выполнению</h3>
-                            <span class="bg-gray-300 text-gray-700 px-2 py-1 rounded-full text-xs">3</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Подготовка образцов</h4>
-                                    <span class="priority-high px-2 py-1 rounded-full text-xs">Высокий</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Подготовить образцы для тестирования биосенсоров</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-blue-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">А</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-gray-500">До 29 октября</span>
-                                </div>
-                            </div>
-
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Документация</h4>
-                                    <span class="priority-medium px-2 py-1 rounded-full text-xs">Средний</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Обновить техническую документацию проекта</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-green-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">М</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-gray-500">До 2 ноября</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- In Progress Column -->
-                    <div class="kanban-column bg-yellow-50 rounded-xl p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-semibold text-yellow-800">В процессе</h3>
-                            <span class="bg-yellow-300 text-yellow-800 px-2 py-1 rounded-full text-xs">2</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Тестирование биосенсоров</h4>
-                                    <span class="priority-high px-2 py-1 rounded-full text-xs">Высокий</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Провести тестирование чувствительности биосенсоров</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-purple-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">И</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-gray-500">До 28 октября</span>
-                                </div>
-                            </div>
-
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Разработка ML модели</h4>
-                                    <span class="priority-medium px-2 py-1 rounded-full text-xs">Средний</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Создание модели машинного обучения для анализа данных</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-red-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">И</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-gray-500">До 30 октября</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Done Column -->
-                    <div class="kanban-column bg-green-50 rounded-xl p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-semibold text-green-800">Завершено</h3>
-                            <span class="bg-green-300 text-green-800 px-2 py-1 rounded-full text-xs">4</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Сбор данных для обучения</h4>
-                                    <span class="priority-low px-2 py-1 rounded-full text-xs">Низкий</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Сбор и подготовка данных для обучения ML модели</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-red-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">И</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-green-600">Завершено 20 октября</span>
-                                </div>
-                            </div>
-
-                            <div class="kanban-card bg-white rounded-lg p-4 shadow-sm" draggable="true">
-                                <div class="flex items-start justify-between mb-2">
-                                    <h4 class="font-semibold text-sm">Настройка оборудования</h4>
-                                    <span class="priority-medium px-2 py-1 rounded-full text-xs">Средний</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mb-3">Калибровка и настройка лабораторного оборудования</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex -space-x-1">
-                                        <div class="w-6 h-6 bg-blue-600 rounded-full border border-white flex items-center justify-center">
-                                            <span class="text-white text-xs">А</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-green-600">Завершено 18 октября</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -575,143 +278,46 @@
     </div>
 
     <script>
-        // Пример: загрузка проектов по сортировке (MVP демонстрация запроса)
-        async function loadProjects() {
-            const sort = document.getElementById('project-sort').value;
-            try {
-                const res = await fetch(`http://localhost:8000/projects?sort_by=${encodeURIComponent(sort)}`);
-                // Здесь можно отрисовать проекты динамически вместо моков
-            } catch (e) {
-                console.warn('Не удалось загрузить проекты', e);
-            }
-        }
-        document.getElementById('project-sort').addEventListener('change', loadProjects);
-        document.addEventListener('DOMContentLoaded', loadProjects);
-        // Initialize project analytics chart
-        function initProjectAnalytics() {
-            const data = [{
-                x: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт'],
-                y: [2, 3, 1, 4, 2, 5, 3, 4, 3, 5],
-                type: 'scatter',
-                mode: 'lines+markers',
-                name: 'Активные проекты',
-                line: { color: '#2563EB', width: 3 },
-                marker: { color: '#2563EB', size: 8 }
-            }, {
-                x: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт'],
-                y: [1, 2, 1, 3, 1, 2, 2, 3, 2, 3],
-                type: 'scatter',
-                mode: 'lines+markers',
-                name: 'Завершенные проекты',
-                line: { color: '#10B981', width: 3 },
-                marker: { color: '#10B981', size: 8 }
-            }];
+        // Фильтрация проектов по стеку и отрасли
+        function filterProjects() {
+            const stackFilter = document.getElementById('stack-filter').value;
+            const industryFilter = document.getElementById('industry-filter').value;
+            const projectCards = document.querySelectorAll('.project-card');
 
-            const layout = {
-                title: '',
-                xaxis: { title: 'Месяц' },
-                yaxis: { title: 'Количество проектов' },
-                margin: { t: 20, r: 20, b: 40, l: 40 },
-                font: { family: 'Inter, sans-serif', size: 12 },
-                legend: { x: 0, y: 1 },
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)'
-            };
+            projectCards.forEach(card => {
+                const cardStack = card.dataset.stack || '';
+                const cardIndustry = card.dataset.industry || '';
 
-            Plotly.newPlot('project-analytics', data, layout, { displayModeBar: false, responsive: true });
-        }
+                const matchesStack = !stackFilter || cardStack.includes(stackFilter);
+                const matchesIndustry = !industryFilter || cardIndustry.includes(industryFilter);
 
-        // Toggle between list and kanban views
-        let isKanbanView = false;
-        document.getElementById('toggle-view').addEventListener('click', function() {
-            isKanbanView = !isKanbanView;
-            
-            if (isKanbanView) {
-                document.getElementById('kanban-board').classList.remove('hidden');
-                this.innerHTML = '<i class="fas fa-th-large mr-2"></i>Канбан';
-            } else {
-                document.getElementById('kanban-board').classList.add('hidden');
-                this.innerHTML = '<i class="fas fa-list mr-2"></i>Список';
-            }
-        });
-
-        // Drag and drop functionality for kanban
-        let draggedElement = null;
-
-        document.querySelectorAll('.kanban-card').forEach(card => {
-            card.addEventListener('dragstart', function(e) {
-                draggedElement = this;
-                this.classList.add('dragging');
-            });
-
-            card.addEventListener('dragend', function(e) {
-                this.classList.remove('dragging');
-            });
-        });
-
-        document.querySelectorAll('.kanban-column').forEach(column => {
-            column.addEventListener('dragover', function(e) {
-                e.preventDefault();
-            });
-
-            column.addEventListener('drop', function(e) {
-                e.preventDefault();
-                if (draggedElement) {
-                    this.querySelector('.space-y-3').appendChild(draggedElement);
-                    
-                    // Update task status based on column
-                    const columnTitle = this.querySelector('h3').textContent;
-                    updateTaskStatus(draggedElement, columnTitle);
+                if (matchesStack && matchesIndustry) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
             });
-        });
-
-        function updateTaskStatus(card, status) {
-            const statusBadge = card.querySelector('.px-2');
-            switch(status) {
-                case 'К выполнению':
-                    statusBadge.className = 'px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full';
-                    statusBadge.textContent = 'Новая';
-                    break;
-                case 'В процессе':
-                    statusBadge.className = 'px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full';
-                    statusBadge.textContent = 'В процессе';
-                    break;
-                case 'Завершено':
-                    statusBadge.className = 'px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full';
-                    statusBadge.textContent = 'Завершено';
-                    break;
-            }
         }
 
-        // Add hover effects
-        document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-4px)';
-                card.style.boxShadow = '0 12px 24px rgba(0,0,0,0.1)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-            });
-        });
+        // Добавить data атрибуты к карточкам проектов
+        function addProjectDataAttributes() {
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                // Пример данных - в реальном приложении эти данные должны приходить с сервера
+                const stacks = ['biotech', 'ai_ml', 'robotics', 'materials', 'energy'];
+                const industries = ['industry', 'agrotech', 'construction', 'transport', 'retail'];
 
-        // Initialize analytics on page load
+                card.dataset.stack = stacks[index % stacks.length];
+                card.dataset.industry = industries[index % industries.length];
+            });
+        }
+
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            initProjectAnalytics();
-        });
+            addProjectDataAttributes();
 
-        // Add click handlers for buttons
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                if (button.textContent.includes('Создать проект') || 
-                    button.textContent.includes('Новый проект') ||
-                    button.textContent.includes('Пригласить в команду')) {
-                    e.preventDefault();
-                    alert('Функция будет доступна после полной регистрации в системе!');
-                }
-            });
+            document.getElementById('stack-filter').addEventListener('change', filterProjects);
+            document.getElementById('industry-filter').addEventListener('change', filterProjects);
         });
     </script>
 </body>

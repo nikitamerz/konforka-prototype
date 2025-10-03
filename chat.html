@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат - Конфорка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; }
+        .font-display { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: #6C37AF; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .btn-primary { background: #6C37AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-primary:hover { background: #5A2D96; transform: translateY(-2px); }
+        .btn-secondary { background: #9CA3AF; border-radius: 12px; transition: all 0.3s; }
+        .btn-secondary:hover { background: #6B7280; transform: translateY(-2px); }
+        .chat-message { max-width: 70%; word-wrap: break-word; }
+        .chat-message.own { margin-left: auto; }
+        .chat-message.other { margin-right: auto; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <img src="Логотип.svg" alt="Конфорка" class="w-6 h-6">
+                        </div>
+                        <span class="font-display font-bold text-xl text-black">Конфорка</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="projects.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Проекты</a>
+                    <a href="equipment.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Оборудование</a>
+                    <a href="mentors.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Менторы</a>
+                    <a href="orders.html" class="text-gray-700 hover:text-[#6C37AF] transition-colors">Заказы</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-[#6C37AF] transition-colors">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-[#6C37AF] rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">А</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-16">
+        <!-- Header -->
+        <div class="bg-[#6C37AF] text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="font-display font-bold text-3xl md:text-4xl mb-2">Чат</h1>
+                <p class="text-sm opacity-90">для тех, кто горит идеей • серая обложка, яркие дела</p>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Chat List Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="p-4 border-b border-gray-200">
+                            <h2 class="font-display font-semibold text-lg">Чаты</h2>
+                        </div>
+                        <div class="divide-y divide-gray-200">
+                            <!-- Chat Item 1 -->
+                            <div class="chat-item p-4 hover:bg-gray-50 cursor-pointer" data-chat-id="1">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-semibold">МС</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Мария Смирнова</p>
+                                        <p class="text-sm text-gray-500 truncate">Проект: Биосенсоры для диагностики</p>
+                                    </div>
+                                    <div class="text-xs text-gray-400">14:30</div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Item 2 -->
+                            <div class="chat-item p-4 hover:bg-gray-50 cursor-pointer" data-chat-id="2">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-semibold">АП</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Алексей Петров</p>
+                                        <p class="text-sm text-gray-500 truncate">Консультация по проекту</p>
+                                    </div>
+                                    <div class="text-xs text-gray-400">Вчера</div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Item 3 -->
+                            <div class="chat-item p-4 hover:bg-gray-50 cursor-pointer" data-chat-id="3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-semibold">МГУ</span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate">МГУ Лаборатория</p>
+                                        <p class="text-sm text-gray-500 truncate">Бронирование оборудования</p>
+                                    </div>
+                                    <div class="text-xs text-gray-400">2 дня</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Area -->
+                <div class="lg:col-span-3">
+                    <div class="bg-white rounded-xl shadow-lg h-[600px] flex flex-col">
+                        <!-- Chat Header -->
+                        <div class="p-4 border-b border-gray-200 flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm font-semibold">МС</span>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-semibold">Мария Смирнова</h3>
+                                <p class="text-sm text-gray-500">Проект: Биосенсоры для диагностики</p>
+                            </div>
+                        </div>
+
+                        <!-- Messages Area -->
+                        <div id="messages-container" class="flex-1 p-4 overflow-y-auto space-y-4">
+                            <!-- Message 1 (Other) -->
+                            <div class="chat-message other">
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="text-sm text-gray-800">Привет! Я заинтересована в вашем проекте биосенсоров. У меня есть опыт в электронике и могу помочь с разработкой.</p>
+                                    <p class="text-xs text-gray-500 mt-1">14:25</p>
+                                </div>
+                            </div>
+
+                            <!-- Message 2 (Own) -->
+                            <div class="chat-message own">
+                                <div class="bg-[#6C37AF] text-white rounded-lg p-3">
+                                    <p class="text-sm">Отлично! Нам как раз нужна помощь с электроникой. Расскажите подробнее о вашем опыте?</p>
+                                    <p class="text-xs text-gray-300 mt-1">14:28</p>
+                                </div>
+                            </div>
+
+                            <!-- Message 3 (Other) -->
+                            <div class="chat-message other">
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="text-sm text-gray-800">У меня 5 лет опыта в разработке медицинской электроники. Работал в компании, которая производит кардиостимуляторы. Могу помочь с проектированием плат и выбором компонентов.</p>
+                                    <p class="text-xs text-gray-500 mt-1">14:30</p>
+                                </div>
+                            </div>
+
+                            <!-- Message 4 (Application Request) -->
+                            <div class="chat-message other border-l-4 border-blue-500 pl-3">
+                                <div class="bg-blue-50 rounded-lg p-3">
+                                    <p class="text-sm font-medium text-blue-800 mb-2">Заявка на участие в проекте</p>
+                                    <p class="text-sm text-gray-700">Мария хочет присоединиться к проекту "Биосенсоры для диагностики" в роли инженера-электроника.</p>
+                                    <div class="flex space-x-2 mt-3">
+                                        <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">Принять</button>
+                                        <button class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Отклонить</button>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">14:32</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex space-x-3">
+                                <input type="text" id="message-input" placeholder="Напишите сообщение..." class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#6C37AF] focus:border-[#6C37AF]">
+                                <button id="send-button" class="btn-primary text-white px-4 py-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat functionality
+        const messagesContainer = document.getElementById('messages-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Mock data for demonstration
+        const mockMessages = [
+            {
+                id: 1,
+                sender: 'other',
+                text: 'Привет! Я заинтересована в вашем проекте биосенсоров. У меня есть опыт в электронике и могу помочь с разработкой.',
+                time: '14:25',
+                type: 'text'
+            },
+            {
+                id: 2,
+                sender: 'own',
+                text: 'Отлично! Нам как раз нужна помощь с электроникой. Расскажите подробнее о вашем опыте?',
+                time: '14:28',
+                type: 'text'
+            },
+            {
+                id: 3,
+                sender: 'other',
+                text: 'У меня 5 лет опыта в разработке медицинской электроники. Работал в компании, которая производит кардиостимуляторы. Могу помочь с проектированием плат и выбором компонентов.',
+                time: '14:30',
+                type: 'text'
+            },
+            {
+                id: 4,
+                sender: 'other',
+                text: 'Мария хочет присоединиться к проекту "Биосенсоры для диагностики" в роли инженера-электроника.',
+                time: '14:32',
+                type: 'application'
+            }
+        ];
+
+        // Load messages
+        function loadMessages() {
+            messagesContainer.innerHTML = '';
+            mockMessages.forEach(message => {
+                const messageElement = createMessageElement(message);
+                messagesContainer.appendChild(messageElement);
+            });
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Create message element
+        function createMessageElement(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.sender}`;
+
+            if (message.type === 'application') {
+                messageDiv.className += ' border-l-4 border-blue-500 pl-3';
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-50 rounded-lg p-3">
+                        <p class="text-sm font-medium text-blue-800 mb-2">Заявка на участие в проекте</p>
+                        <p class="text-sm text-gray-700">${message.text}</p>
+                        <div class="flex space-x-2 mt-3">
+                            <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">Принять</button>
+                            <button class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Отклонить</button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">${message.time}</p>
+                    </div>
+                `;
+            } else {
+                const bgColor = message.sender === 'own' ? 'bg-[#6C37AF] text-white' : 'bg-gray-100';
+                messageDiv.innerHTML = `
+                    <div class="${bgColor} rounded-lg p-3">
+                        <p class="text-sm">${message.text}</p>
+                        <p class="text-xs ${message.sender === 'own' ? 'text-gray-300' : 'text-gray-500'} mt-1">${message.time}</p>
+                    </div>
+                `;
+            }
+
+            return messageDiv;
+        }
+
+        // Send message
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (!text) return;
+
+            const newMessage = {
+                id: Date.now(),
+                sender: 'own',
+                text: text,
+                time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+                type: 'text'
+            };
+
+            mockMessages.push(newMessage);
+            const messageElement = createMessageElement(newMessage);
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            messageInput.value = '';
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Chat item selection
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('bg-blue-50'));
+                item.classList.add('bg-blue-50');
+                // Load messages for selected chat
+                loadMessages();
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMessages();
+        });
+    </script>
+</body>
+</html>
